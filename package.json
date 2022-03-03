@@ -1,0 +1,12 @@
+{
+  "name": "wireshark-lua-api-declarations",
+  "version": "0.0.1",
+  "description": "",
+  "types": "wireshark-lua-api.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yusuke Kawamoto <novogrammer@gmail.com> (https://github.com/novogrammer/)",
+  "license": "MIT"
+}
