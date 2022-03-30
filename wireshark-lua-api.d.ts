@@ -682,7 +682,7 @@ declare const PseudoHeader: PseudoHeaderConstructor;
 // #region 11.2. Obtaining Dissection Data
 // https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_Field.html
 declare interface Field {
-  (): LuaMultiReturn<[...Array<FieldInfo>]>;
+  (this:void): LuaMultiReturn<[...Array<FieldInfo>]>;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
@@ -700,7 +700,7 @@ type FieldInfoValueType = boolean | uint | int | double | Int64 | UInt64 | Addre
 declare interface FieldInfo {
   __len: LuaLengthMethod<gint>;
   __unm: LuaNegationMethod<gint>;
-  (): FieldInfoValueType;
+  (this:void): FieldInfoValueType;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
@@ -722,7 +722,7 @@ declare interface FieldInfo {
   readonly big_endian: boolean;
   readonly name: string;
 }
-declare function all_field_infos(): any;
+declare function all_field_infos(this: void): any;
 // #endregion
 
 // #region 11.3. GUI Support
@@ -755,26 +755,26 @@ interface TextWindowConstructor {
 }
 declare const TextWindow: TextWindowConstructor;
 
-declare function gui_enabled(): boolean;
-declare function register_menu(name: string, action: Action, group?: guint): void;
-declare function new_dialog(title: string, action: (...params: Array<any>) => void, ...params: Array<any>): void;
-declare function retap_packets(): void;
-declare function copy_to_clipboard(text: string): void
-declare function open_capture_file(filename: string, filter: string): boolean;
-declare function get_filter(): string;
-declare function set_filter(filter: string): void;
-declare function get_color_filter_slot(row: guint8): string;
-declare function set_color_filter_slot(row: guint8, text: string): void;
-declare function apply_filter(): void;
+declare function gui_enabled(this: void): boolean;
+declare function register_menu(this: void, name: string, action: Action, group?: guint): void;
+declare function new_dialog(this: void, title: string, action: (...params: Array<any>) => void, ...params: Array<any>): void;
+declare function retap_packets(this: void): void;
+declare function copy_to_clipboard(this: void, text: string): void
+declare function open_capture_file(this: void, filename: string, filter: string): boolean;
+declare function get_filter(this: void): string;
+declare function set_filter(this: void, filter: string): void;
+declare function get_color_filter_slot(this: void, row: guint8): string;
+declare function set_color_filter_slot(this: void, row: guint8, text: string): void;
+declare function apply_filter(this: void): void;
 /**
  * @deprecated Use reload_packets() instead.
  */
-declare function reload(): void;
-declare function reload_packets(): void;
-declare function redissect_packets(): void;
-declare function reload_lua_plugins(): void;
-declare function browser_open_url(url: string): void;
-declare function browser_open_data_file(filename: string): void;
+declare function reload(this: void): void;
+declare function reload_packets(this: void): void;
+declare function redissect_packets(this: void): void;
+declare function reload_lua_plugins(this: void): void;
+declare function browser_open_url(this: void, url: string): void;
+declare function browser_open_data_file(this: void, filename: string): void;
 
 // #endregion
 
@@ -842,7 +842,7 @@ declare interface Columns extends LuaTable<string, Column | string> {
   // __index(column:string):Column;
 }
 declare interface NSTime {
-  (seconds?: time_t, nseconds?: int): NSTime;
+  (this:void,seconds?: time_t, nseconds?: int): NSTime;
   tonumber(): number;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
@@ -1048,8 +1048,8 @@ interface ProtoFieldConstructor {
 declare const ProtoField: ProtoFieldConstructor;
 
 
-declare function register_postdissector(proto: Proto, allfields?: boolean): void;
-declare function dissect_tcp_pdus(tvb: Tvb, tree: TreeItem, min_header_size: guint, get_len_func: GetLenFunction, dissect_func: DissectorFunction, desegment?: boolean): void;
+declare function register_postdissector(this: void, proto: Proto, allfields?: boolean): void;
+declare function dissect_tcp_pdus(this: void, tvb: Tvb, tree: TreeItem, min_header_size: guint, get_len_func: GetLenFunction, dissect_func: DissectorFunction, desegment?: boolean): void;
 // #endregion
 
 // #region 11.7. Adding Information To The Dissection Tree
@@ -1057,8 +1057,14 @@ declare interface TreeItem {
   add_packet_field(protofield: ProtoField, tvbrange: TvbRange, encoding: Encoding, ...labels: Array<string>): LuaMultiReturn<[TreeItem | null, FieldInfoValueType | null, int | null]>;
   // overload for tvbrange?:TvbRange
   add_packet_field(protofield: ProtoField, encoding: Encoding, ...labels: Array<string>): LuaMultiReturn<[TreeItem | null, FieldInfoValueType | null, int | null]>;
-  add(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
-  add_le(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add(...labels: Array<string>): TreeItem;
+  add(protofield: ProtoField, ...labels: Array<string>): TreeItem;
+  add(protofield: ProtoField, tvbrange: TvbRange, ...labels: Array<string>): TreeItem;
+  add(protofield: ProtoField, tvbrange: TvbRange, value: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add_le(...labels: Array<string>): TreeItem;
+  add_le(protofield: ProtoField, ...labels: Array<string>): TreeItem;
+  add_le(protofield: ProtoField, tvbrange: TvbRange, ...labels: Array<string>): TreeItem;
+  add_le(protofield: ProtoField, tvbrange: TvbRange, value: FieldInfoValueType, ...labels: Array<string>): TreeItem;
   set_text(text: string): TreeItem;
   append_text(text: string): TreeItem;
   prepend_text(text: string): TreeItem;
@@ -1278,8 +1284,8 @@ declare interface FrameInfoConst {
   readonly encap: wtap_encaps;
 }
 
-declare function register_filehandler(filehandler: FileHandler): wtap_filetypes;
-declare function deregister_filehandler(filehandler: FileHandler): void;
+declare function register_filehandler(this: void, filehandler: FileHandler): wtap_filetypes;
+declare function deregister_filehandler(this: void, filehandler: FileHandler): void;
 
 // #endregion
 
@@ -1291,7 +1297,7 @@ declare interface Dir {
   personal_plugins_path(): string;
   global_plugins_path(): string;
   // string|void ?
-  (): string | null;
+  (this:void): string | null;
 }
 interface DirConstructor {
   make(name: string): boolean | null;
@@ -1304,33 +1310,33 @@ declare const Dir: DirConstructor;
 // #endregion
 
 // #region 11.11. Wtap Functions For Handling Capture File Types
-declare function wtap_file_type_subtype_name(filetype: wtap_filetypes): string | null;
-declare function wtap_name_to_file_type_subtype(name: string): wtap_filetypes | null;
-declare function wtap_pcap_file_type_subtype(): wtap_filetypes;
-declare function wtap_pcap_nsec_file_type_subtype(): wtap_filetypes;
-declare function wtap_pcapng_file_type_subtype(): wtap_filetypes;
+declare function wtap_file_type_subtype_name(this: void, filetype: wtap_filetypes): string | null;
+declare function wtap_name_to_file_type_subtype(this: void, name: string): wtap_filetypes | null;
+declare function wtap_pcap_file_type_subtype(this: void): wtap_filetypes;
+declare function wtap_pcap_nsec_file_type_subtype(this: void): wtap_filetypes;
+declare function wtap_pcapng_file_type_subtype(this: void): wtap_filetypes;
 // #endregion
 
 // #region 11.12. Utility Functions
-declare function get_version(): string;
-declare function set_plugin_info(table: LuaTable): void;
-declare function format_date(timestamp: Timestamp): string;
-declare function format_time(timestamp: Timestamp): string;
-declare function get_preference(preference: string): PrefValueType | null;
-declare function set_preference(preference: string, value: PrefValueType): boolean | null;
-declare function reset_preference(preference: string): true | null;
-declare function apply_preferences(): void;
-declare function report_failure(text: string): void;
-declare function loadfile(filename: string): LuaMultiReturn<[Action]> | LuaMultiReturn<[null, LuaErrorString, LuaErrorNumber]>;
-declare function dofile(filename: string): LuaMultiReturn<Array<any>>;
-declare function register_stat_cmd_arg(argument: string, action?: Action): void;
+declare function get_version(this: void): string;
+declare function set_plugin_info(this: void, table: LuaTable): void;
+declare function format_date(this: void, timestamp: Timestamp): string;
+declare function format_time(this: void, timestamp: Timestamp): string;
+declare function get_preference(this: void, preference: string): PrefValueType | null;
+declare function set_preference(this: void, preference: string, value: PrefValueType): boolean | null;
+declare function reset_preference(this: void, preference: string): true | null;
+declare function apply_preferences(this: void): void;
+declare function report_failure(this: void, text: string): void;
+declare function loadfile(this: void, filename: string): LuaMultiReturn<[Action]> | LuaMultiReturn<[null, LuaErrorString, LuaErrorNumber]>;
+declare function dofile(this: void, filename: string): LuaMultiReturn<Array<any>>;
+declare function register_stat_cmd_arg(this: void, argument: string, action?: Action): void;
 
 // #endregion
 
 // #region 11.13. Handling 64-bit Integers
 declare interface Int64 {
   encode(endian?: boolean): string;
-  (): Int64;
+  (this:void): Int64;
   tonumber(): double;
   tohex(numbytes?: int): string;
   higher(): gint32;
@@ -1370,7 +1376,7 @@ declare const Int64: Int64Constructor;
 
 declare interface UInt64 {
   encode(endian?: boolean): string;
-  (): UInt64;
+  (this:void): UInt64;
   tonumber(): double;
   tohex(numbytes?: int): string;
   higher(): guint32;
