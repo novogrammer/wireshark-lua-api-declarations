@@ -1,0 +1,19 @@
+{
+  "include": [
+    "**/*.ts"
+  ],
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext","dom"],
+    "moduleResolution": "node",
+    "types": ["typescript-to-lua/language-extensions"],
+    "outDir": "./dist",
+    "removeComments": false,
+    "strict": true
+
+  },
+  "tstl": {
+    "luaTarget": "5.2"
+  }
+
+}
