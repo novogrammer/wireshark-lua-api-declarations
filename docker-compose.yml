@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  tshark:
+    build: ./tshark/
+    container_name: wireshark-lua-api-declarations-tshark
+    # restart: always
+    volumes:
+      - ./test/dist:/work/dist
+    tty: true
+    command: tshark -c 0 -X lua_script:dist/a.lua

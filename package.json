@@ -4,12 +4,14 @@
   "description": "",
   "types": "wireshark-lua-api.d.ts",
   "scripts": {
+    "test:build": "tstl",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Yusuke Kawamoto <novogrammer@gmail.com> (https://github.com/novogrammer/)",
   "license": "MIT",
   "devDependencies": {
+    "lua-types": "^2.11.0",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5",
     "typescript-to-lua": "^1.3.4"
