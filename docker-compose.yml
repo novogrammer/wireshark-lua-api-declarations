@@ -7,6 +7,7 @@ services:
     volumes:
       - ./test/dist:/test/dist
       - ./test/scripts:/test/scripts
+      - ./test/captures:/test/captures
     tty: true
     working_dir: /test
     command: /test/scripts/test-all.sh
