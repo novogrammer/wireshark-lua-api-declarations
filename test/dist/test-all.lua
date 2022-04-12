@@ -42,12 +42,12 @@ function canCallNoError(f, ...)
     end
     return result[1]
 end
-Counter = __TS__Class()
-Counter.name = "Counter"
-function Counter.prototype.____constructor(self)
+Recorder = __TS__Class()
+Recorder.name = "Recorder"
+function Recorder.prototype.____constructor(self)
     self.hasCalledNoErrorResultList = {}
 end
-function Counter.prototype.tryPcall(self, name, f, ...)
+function Recorder.prototype.tryPcall(self, name, f, ...)
     local result = {pcall(f, ...)}
     if result[1] then
         __TS__ArrayPush(self.hasCalledNoErrorResultList, {isNoError = true, name = name})
@@ -55,7 +55,7 @@ function Counter.prototype.tryPcall(self, name, f, ...)
         __TS__ArrayPush(self.hasCalledNoErrorResultList, {isNoError = false, name = name, errorMessage = result[2]})
     end
 end
-function Counter.prototype.printResult(self)
+function Recorder.prototype.printResult(self)
     local calledWithErrorList = __TS__ArrayFilter(
         self.hasCalledNoErrorResultList,
         function(____, ____bindingPattern0)
@@ -82,27 +82,66 @@ function Counter.prototype.printResult(self)
     )
     print((("result " .. tostring(isNoErrorCount)) .. "/") .. tostring(totalCount))
 end
-counter = __TS__New(Counter)
+recorder = __TS__New(Recorder)
 function test_chapter_11_1_1()
-    counter:tryPcall(
-        "Dumper.new",
+    recorder:tryPcall(
+        "Dumper.new(filename)",
         function()
             local dumper = Dumper.new("dummyfile")
             dumper:close()
         end
     )
-    counter:tryPcall(
-        "Dumper.new with filetype",
+    recorder:tryPcall(
+        "Dumper.new(filename,filetype)",
         function()
             local dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP)
             dumper:close()
         end
     )
-    counter:tryPcall(
-        "Dumper.new with filetype encap",
+    recorder:tryPcall(
+        "Dumper.new(filename,filetype,encap)",
         function()
             local dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP, wtap_encaps.ETHERNET)
             dumper:close()
+        end
+    )
+    recorder:tryPcall(
+        "dumper:close()",
+        function()
+            local dumper = Dumper.new("dummyfile")
+            dumper:close()
+        end
+    )
+    recorder:tryPcall(
+        "dumper:flush()",
+        function()
+            local dumper = Dumper.new("dummyfile")
+            dumper:flush()
+            dumper:close()
+        end
+    )
+    recorder:tryPcall(
+        "dumper:dump()",
+        function()
+            local dumper = Dumper.new("dummyfile")
+            dumper:dump(
+                0,
+                PseudoHeader.none(),
+                ByteArray.new("ff fe ff fe")
+            )
+            dumper:close()
+        end
+    )
+    recorder:tryPcall(
+        "Dumper.new_for_current(filename)",
+        function()
+            error("TODO: tap", 0)
+        end
+    )
+    recorder:tryPcall(
+        "Dumper.new_for_current(filename,filetype)",
+        function()
+            error("TODO: tap", 0)
         end
     )
 end
@@ -112,7 +151,7 @@ end
 function test_all()
     print("begin test_all")
     test_chapter_11_1()
-    counter:printResult()
+    recorder:printResult()
     print("end test_all")
 end
 test_all()
