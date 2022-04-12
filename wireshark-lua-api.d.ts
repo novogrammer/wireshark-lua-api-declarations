@@ -655,12 +655,12 @@ declare interface Dumper {
   close(): void;
   flush(): void;
   dump(timestamp: Timestamp, pseudoheader: PseudoHeader, bytearray: ByteArray): void;
-  new_for_current(filetype?: wtap_filetypes): Dumper;
   dump_current(): void;
 
 }
 interface DumperConstructor {
   new: (this: void, filename: string, filetype?: wtap_filetypes, encap?: wtap_encaps) => Dumper;
+  new_for_current(this: void, filename: string, filetype?: wtap_filetypes): Dumper;
 }
 
 declare const Dumper: DumperConstructor;
@@ -682,7 +682,7 @@ declare const PseudoHeader: PseudoHeaderConstructor;
 // #region 11.2. Obtaining Dissection Data
 // https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_Field.html
 declare interface Field {
-  (this:void): LuaMultiReturn<[...Array<FieldInfo>]>;
+  (this: void): LuaMultiReturn<[...Array<FieldInfo>]>;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
@@ -700,7 +700,7 @@ type FieldInfoValueType = boolean | uint | int | double | Int64 | UInt64 | Addre
 declare interface FieldInfo {
   __len: LuaLengthMethod<gint>;
   __unm: LuaNegationMethod<gint>;
-  (this:void): FieldInfoValueType;
+  (this: void): FieldInfoValueType;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
@@ -787,11 +787,11 @@ declare interface Listener {
   // foo.toString() transpile to tostring(foo)
   toString(): string;
   // Mode: Assign only.
-  packet: (pinfo: Pinfo, tvb: Tvb, tapinfo: LuaTable | null) => void;
+  packet: (this: void, pinfo: Pinfo, tvb: Tvb, tapinfo: LuaTable | null) => void;
   // Mode: Assign only.
-  draw: () => void;
+  draw: (this: void) => void;
   // Mode: Assign only.
-  reset: () => void;
+  reset: (this: void) => void;
 
 }
 interface ListenerConstructor {
@@ -799,6 +799,8 @@ interface ListenerConstructor {
   list: (this: void) => LuaTable<number, string>;
 
 }
+declare const Listener: ListenerConstructor;
+
 // #endregion
 
 // #region 11.5. Obtaining Packet Information
@@ -842,7 +844,7 @@ declare interface Columns extends LuaTable<string, Column | string> {
   // __index(column:string):Column;
 }
 declare interface NSTime {
-  (this:void,seconds?: time_t, nseconds?: int): NSTime;
+  (this: void, seconds?: time_t, nseconds?: int): NSTime;
   tonumber(): number;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
@@ -1297,7 +1299,7 @@ declare interface Dir {
   personal_plugins_path(): string;
   global_plugins_path(): string;
   // string|void ?
-  (this:void): string | null;
+  (this: void): string | null;
 }
 interface DirConstructor {
   make(name: string): boolean | null;
@@ -1336,7 +1338,7 @@ declare function register_stat_cmd_arg(this: void, argument: string, action?: Ac
 // #region 11.13. Handling 64-bit Integers
 declare interface Int64 {
   encode(endian?: boolean): string;
-  (this:void): Int64;
+  (this: void): Int64;
   tonumber(): double;
   tohex(numbytes?: int): string;
   higher(): gint32;
@@ -1376,7 +1378,7 @@ declare const Int64: Int64Constructor;
 
 declare interface UInt64 {
   encode(endian?: boolean): string;
-  (this:void): UInt64;
+  (this: void): UInt64;
   tonumber(): double;
   tohex(numbytes?: int): string;
   higher(): guint32;
