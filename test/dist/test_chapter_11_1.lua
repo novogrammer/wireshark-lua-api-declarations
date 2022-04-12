@@ -146,12 +146,9 @@ function test_chapter_11_1_1()
     )
 end
 function test_chapter_11_1()
+    print("begin test_chapter_11_1")
     test_chapter_11_1_1()
+    print("end test_chapter_11_1")
 end
-function test_all()
-    print("begin test_all")
-    test_chapter_11_1()
-    recorder:printResult()
-    print("end test_all")
-end
-test_all()
+test_chapter_11_1()
+recorder:printResult()

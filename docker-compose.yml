@@ -5,6 +5,8 @@ services:
     container_name: wireshark-lua-api-declarations-tshark
     # restart: always
     volumes:
-      - ./test/dist:/work/dist
+      - ./test/dist:/test/dist
+      - ./test/scripts:/test/scripts
     tty: true
-    command: tshark -c 0 -X lua_script:dist/test-all.lua
+    working_dir: /test
+    command: /test/scripts/test-all.sh

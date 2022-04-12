@@ -112,17 +112,13 @@ function test_chapter_11_1_1(this: void) {
 
 
 function test_chapter_11_1(this: void) {
+  console.log("begin test_chapter_11_1");
   test_chapter_11_1_1();
+  console.log("end test_chapter_11_1");
 }
 
 
-function test_all(this: void) {
-  console.log("begin test_all");
-  test_chapter_11_1();
-
-  recorder.printResult();
-  console.log("end test_all");
-}
+test_chapter_11_1();
+recorder.printResult();
 
 
-test_all();
