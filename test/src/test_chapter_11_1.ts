@@ -1,63 +1,6 @@
 
+import Recorder from "./Recorder";
 
-function canCallNoError<Args extends any[], R>(this: void, f: (this: void, ...args: Args) => R, ...args: Args): boolean {
-  const result = pcall(f, ...args);
-  if (!result[0]) {
-    result[1]
-  }
-  return result[0];
-}
-
-
-interface CalledWithError {
-  isNoError: true,
-  name: string,
-}
-
-interface CalledWithNoError {
-  isNoError: false,
-  name: string,
-  errorMessage: string,
-}
-type CalledWithErrorOrNoError = CalledWithError | CalledWithNoError;
-
-class Recorder {
-
-  hasCalledNoErrorResultList: CalledWithErrorOrNoError[] = [];
-  constructor() {
-  }
-  tryPcall<Args extends any[], R>(name: string, f: (this: void, ...args: Args) => R, ...args: Args): void {
-    const result = pcall(f, ...args);
-    if (result[0]) {
-      this.hasCalledNoErrorResultList.push({
-        isNoError: true,
-        name,
-      });
-    } else {
-      this.hasCalledNoErrorResultList.push({
-        isNoError: false,
-        name,
-        errorMessage: result[1],
-      });
-    }
-  }
-  printResult() {
-
-    const calledWithErrorList = this.hasCalledNoErrorResultList.filter(({ isNoError }) => !isNoError);
-    for (let calledWithErrorOrNoError of this.hasCalledNoErrorResultList) {
-      if (!calledWithErrorOrNoError.isNoError) {
-        console.log("error detail");
-        console.log(`name: "${calledWithErrorOrNoError.name}"`);
-        console.log(`errorMessage: "${calledWithErrorOrNoError.errorMessage}"`);
-      }
-
-    }
-
-    const totalCount = this.hasCalledNoErrorResultList.length;
-    const isNoErrorCount = this.hasCalledNoErrorResultList.filter(({ isNoError }) => isNoError).length;
-    console.log(`result ${isNoErrorCount}/${totalCount}`);
-  }
-}
 
 const recorder = new Recorder();
 
@@ -89,25 +32,13 @@ function test_chapter_11_1_1(this: void) {
     dumper.close();
   });
   recorder.tryPcall("Dumper.new_for_current(filename)", () => {
-    throw "TODO: tap"
+    const dumper = Dumper.new_for_current("dummyfile");
+    dumper.close();
   });
   recorder.tryPcall("Dumper.new_for_current(filename,filetype)", () => {
-    throw "TODO: tap"
+    const dumper = Dumper.new_for_current("dummyfile", wtap_filetypes.PCAP);
+    dumper.close();
   });
-  // recorder.tryPcall("Dumper.new_for_current(filename)", () => {
-  //   const tap = Listener.new();
-  //   tap.reset = function (this: void) {
-  //     const dumper = Dumper.new_for_current("dummyfile");
-  //     dumper.close();
-  //   };
-  // });
-  // recorder.tryPcall("Dumper.new_for_current(filename,filetype)", () => {
-  //   const tap = Listener.new();
-  //   tap.reset = function (this: void) {
-  //     const dumper = Dumper.new_for_current("dummyfile", wtap_filetypes.PCAP);
-  //     dumper.close();
-  //   };
-  // });
 }
 
 
@@ -117,8 +48,17 @@ function test_chapter_11_1(this: void) {
   console.log("end test_chapter_11_1");
 }
 
+const chapter_11_1_proto = Proto.new("chapter_11_1_proto", "test");
+chapter_11_1_proto.init = function () {
 
-test_chapter_11_1();
-recorder.printResult();
+}
+
+chapter_11_1_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {
+  test_chapter_11_1();
+  recorder.printResult();
+  return 0;
+}
+
+register_postdissector(chapter_11_1_proto);
 
 
