@@ -1,34 +1,5 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
--- Lua Library inline imports
-function __TS__Class(self)
-    local c = {prototype = {}}
-    c.prototype.__index = c.prototype
-    c.prototype.constructor = c
-    return c
-end
-
-function __TS__ArrayPush(arr, ...)
-    local items = {...}
-    for ____, item in ipairs(items) do
-        arr[#arr + 1] = item
-    end
-    return #arr
-end
-
-function __TS__ArrayFilter(arr, callbackfn)
-    local result = {}
-    do
-        local i = 0
-        while i < #arr do
-            if callbackfn(_G, arr[i + 1], i, arr) then
-                result[#result + 1] = arr[i + 1]
-            end
-            i = i + 1
-        end
-    end
-    return result
-end
-
+require("lualib_bundle");
 local ____exports = {}
 local function canCallNoError(f, ...)
     local result = {pcall(f, ...)}

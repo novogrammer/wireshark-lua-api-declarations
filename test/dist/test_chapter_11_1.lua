@@ -1,11 +1,5 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
--- Lua Library inline imports
-function __TS__New(target, ...)
-    local instance = setmetatable({}, target.prototype)
-    instance:____constructor(...)
-    return instance
-end
-
+require("lualib_bundle");
 local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
@@ -74,9 +68,105 @@ local function test_chapter_11_1_1()
         end
     )
 end
+local function test_chapter_11_1_2()
+    recorder:tryPcall(
+        "PseudoHeader.none()",
+        function()
+            local pseudoHeader = PseudoHeader.none()
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.eth(fcslen)",
+        function()
+            local pseudoHeader = PseudoHeader.eth(1000)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.eth()",
+        function()
+            local pseudoHeader = PseudoHeader.eth()
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm()",
+        function()
+            local pseudoHeader = PseudoHeader.atm()
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(aal)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(1)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,vpi)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(nil, 1)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,nil,vci)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(nil, nil, 1)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,nil,nil,channel)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(nil, nil, nil, 1)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,nil,nil,nil,cells)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(
+                nil,
+                nil,
+                nil,
+                nil,
+                1
+            )
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,nil,nil,nil,nil,aal5u2u)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(
+                nil,
+                nil,
+                nil,
+                nil,
+                nil,
+                1
+            )
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.atm(nil,nil,nil,nil,nil,nil,aal5len)",
+        function()
+            local pseudoHeader = PseudoHeader.atm(
+                nil,
+                nil,
+                nil,
+                nil,
+                nil,
+                nil,
+                1
+            )
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.mtp2()",
+        function()
+            error("todo", 0)
+        end
+    )
+end
 local function test_chapter_11_1()
     print("begin test_chapter_11_1")
     test_chapter_11_1_1()
+    test_chapter_11_1_2()
     print("end test_chapter_11_1")
 end
 local chapter_11_1_proto = Proto.new("chapter_11_1_proto", "test")
