@@ -10,6 +10,7 @@
   },
   "keywords": [],
   "author": "Yusuke Kawamoto <novogrammer@gmail.com> (https://github.com/novogrammer/)",
+  "homepage": "https://github.com/novogrammer/wireshark-lua-api-declarations",
   "license": "MIT",
   "devDependencies": {
     "lua-types": "^2.11.0",
