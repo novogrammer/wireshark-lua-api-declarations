@@ -47,6 +47,7 @@ export default class Recorder {
         console.log("error detail");
         console.log(`name: "${calledWithErrorOrNoError.name}"`);
         console.log(`errorMessage: "${calledWithErrorOrNoError.errorMessage}"`);
+        console.log("test failed.");
       }
 
     }

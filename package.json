@@ -5,8 +5,8 @@
   "types": "wireshark-lua-api.d.ts",
   "scripts": {
     "test:build": "tstl",
-    "test:docker": "docker compose up",
-    "test": "run-s test:build test:docker"
+    "test:run": "./test/scripts/test-all.sh",
+    "test": "run-s test:build test:run"
   },
   "keywords": [],
   "author": "Yusuke Kawamoto <novogrammer@gmail.com> (https://github.com/novogrammer/)",

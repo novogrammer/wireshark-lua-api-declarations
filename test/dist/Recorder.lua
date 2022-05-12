@@ -36,6 +36,7 @@ function Recorder.prototype.printResult(self)
             print("error detail")
             print(("name: \"" .. calledWithErrorOrNoError.name) .. "\"")
             print(("errorMessage: \"" .. calledWithErrorOrNoError.errorMessage) .. "\"")
+            print("test failed.")
         end
     end
     local totalCount = #self.hasCalledNoErrorResultList
