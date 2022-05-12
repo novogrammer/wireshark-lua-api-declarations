@@ -10,7 +10,22 @@ PARENT=$(cd $(dirname $0)/.. && pwd)
 
 
 COMMAND_LIST=(
-  "tshark -r $PARENT/captures/http.pcap  -X lua_script:$PARENT/dist/test_chapter_11_1.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_1.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_2.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_2.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_4.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_5.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_6.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_7.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_8.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_9.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_10.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_11.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_12.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_13.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_14.lua"
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_15.lua"
 )
 
 output_list=()

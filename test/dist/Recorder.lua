@@ -22,13 +22,16 @@ function Recorder.prototype.tryPcall(self, name, f, ...)
         __TS__ArrayPush(self.hasCalledNoErrorResultList, {isNoError = false, name = name, errorMessage = result[2]})
     end
 end
+function Recorder.prototype.printFailed(self)
+    print("test failed.")
+end
 function Recorder.prototype.printResult(self)
     for ____, calledWithErrorOrNoError in ipairs(self.hasCalledNoErrorResultList) do
         if not calledWithErrorOrNoError.isNoError then
             print("error detail")
             print(("name: \"" .. calledWithErrorOrNoError.name) .. "\"")
             print(("errorMessage: \"" .. calledWithErrorOrNoError.errorMessage) .. "\"")
-            print("test failed.")
+            self:printFailed()
         end
     end
     local totalCount = #self.hasCalledNoErrorResultList

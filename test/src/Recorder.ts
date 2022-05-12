@@ -39,6 +39,9 @@ export default class Recorder {
       });
     }
   }
+  printFailed() {
+    console.log("test failed.");
+  }
   printResult() {
 
     for (let calledWithErrorOrNoError of this.hasCalledNoErrorResultList) {
@@ -46,9 +49,8 @@ export default class Recorder {
         console.log("error detail");
         console.log(`name: "${calledWithErrorOrNoError.name}"`);
         console.log(`errorMessage: "${calledWithErrorOrNoError.errorMessage}"`);
-        console.log("test failed.");
+        this.printFailed();
       }
-
     }
 
     const totalCount = this.hasCalledNoErrorResultList.length;
