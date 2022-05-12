@@ -3,40 +3,41 @@ require("lualib_bundle");
 local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
+local DUMMYFILE_PATH = "/tmp/dummyfile"
 local recorder = __TS__New(Recorder)
 local function test_chapter_11_1_1()
     recorder:tryPcall(
         "Dumper.new(filename)",
         function()
-            local dumper = Dumper.new("dummyfile")
+            local dumper = Dumper.new(DUMMYFILE_PATH)
             dumper:close()
         end
     )
     recorder:tryPcall(
         "Dumper.new(filename,filetype)",
         function()
-            local dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP)
+            local dumper = Dumper.new(DUMMYFILE_PATH, wtap_filetypes.PCAP)
             dumper:close()
         end
     )
     recorder:tryPcall(
         "Dumper.new(filename,filetype,encap)",
         function()
-            local dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP, wtap_encaps.ETHERNET)
+            local dumper = Dumper.new(DUMMYFILE_PATH, wtap_filetypes.PCAP, wtap_encaps.ETHERNET)
             dumper:close()
         end
     )
     recorder:tryPcall(
         "dumper:close()",
         function()
-            local dumper = Dumper.new("dummyfile")
+            local dumper = Dumper.new(DUMMYFILE_PATH)
             dumper:close()
         end
     )
     recorder:tryPcall(
         "dumper:flush()",
         function()
-            local dumper = Dumper.new("dummyfile")
+            local dumper = Dumper.new(DUMMYFILE_PATH)
             dumper:flush()
             dumper:close()
         end
@@ -44,7 +45,7 @@ local function test_chapter_11_1_1()
     recorder:tryPcall(
         "dumper:dump()",
         function()
-            local dumper = Dumper.new("dummyfile")
+            local dumper = Dumper.new(DUMMYFILE_PATH)
             dumper:dump(
                 0,
                 PseudoHeader.none(),
@@ -56,14 +57,14 @@ local function test_chapter_11_1_1()
     recorder:tryPcall(
         "Dumper.new_for_current(filename)",
         function()
-            local dumper = Dumper.new_for_current("dummyfile")
+            local dumper = Dumper.new_for_current(DUMMYFILE_PATH)
             dumper:close()
         end
     )
     recorder:tryPcall(
         "Dumper.new_for_current(filename,filetype)",
         function()
-            local dumper = Dumper.new_for_current("dummyfile", wtap_filetypes.PCAP)
+            local dumper = Dumper.new_for_current(DUMMYFILE_PATH, wtap_filetypes.PCAP)
             dumper:close()
         end
     )
@@ -175,6 +176,7 @@ end
 chapter_11_1_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_1()
     recorder:printResult()
+    os.remove(DUMMYFILE_PATH)
     return 0
 end
 register_postdissector(chapter_11_1_proto)

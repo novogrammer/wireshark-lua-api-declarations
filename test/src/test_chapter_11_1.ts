@@ -1,42 +1,43 @@
 
 import Recorder from "./Recorder";
 
+const DUMMYFILE_PATH = "/tmp/dummyfile";
 
 const recorder = new Recorder();
 
 function test_chapter_11_1_1(this: void) {
   recorder.tryPcall("Dumper.new(filename)", () => {
-    const dumper = Dumper.new("dummyfile");
+    const dumper = Dumper.new(DUMMYFILE_PATH);
     dumper.close();
   });
   recorder.tryPcall("Dumper.new(filename,filetype)", () => {
-    const dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP);
+    const dumper = Dumper.new(DUMMYFILE_PATH, wtap_filetypes.PCAP);
     dumper.close();
   });
   recorder.tryPcall("Dumper.new(filename,filetype,encap)", () => {
-    const dumper = Dumper.new("dummyfile", wtap_filetypes.PCAP, wtap_encaps.ETHERNET);
+    const dumper = Dumper.new(DUMMYFILE_PATH, wtap_filetypes.PCAP, wtap_encaps.ETHERNET);
     dumper.close();
   });
   recorder.tryPcall("dumper:close()", () => {
-    const dumper = Dumper.new("dummyfile");
+    const dumper = Dumper.new(DUMMYFILE_PATH);
     dumper.close();
   });
   recorder.tryPcall("dumper:flush()", () => {
-    const dumper = Dumper.new("dummyfile");
+    const dumper = Dumper.new(DUMMYFILE_PATH);
     dumper.flush();
     dumper.close();
   });
   recorder.tryPcall("dumper:dump()", () => {
-    const dumper = Dumper.new("dummyfile");
+    const dumper = Dumper.new(DUMMYFILE_PATH);
     dumper.dump(0, PseudoHeader.none(), ByteArray.new("ff fe ff fe"));
     dumper.close();
   });
   recorder.tryPcall("Dumper.new_for_current(filename)", () => {
-    const dumper = Dumper.new_for_current("dummyfile");
+    const dumper = Dumper.new_for_current(DUMMYFILE_PATH);
     dumper.close();
   });
   recorder.tryPcall("Dumper.new_for_current(filename,filetype)", () => {
-    const dumper = Dumper.new_for_current("dummyfile", wtap_filetypes.PCAP);
+    const dumper = Dumper.new_for_current(DUMMYFILE_PATH, wtap_filetypes.PCAP);
     dumper.close();
   });
 }
@@ -96,6 +97,7 @@ chapter_11_1_proto.init = function () {
 chapter_11_1_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {
   test_chapter_11_1();
   recorder.printResult();
+  os.remove(DUMMYFILE_PATH)
   return 0;
 }
 
