@@ -23,14 +23,6 @@ function Recorder.prototype.tryPcall(self, name, f, ...)
     end
 end
 function Recorder.prototype.printResult(self)
-    local calledWithErrorList = __TS__ArrayFilter(
-        self.hasCalledNoErrorResultList,
-        function(____, ____bindingPattern0)
-            local isNoError
-            isNoError = ____bindingPattern0.isNoError
-            return not isNoError
-        end
-    )
     for ____, calledWithErrorOrNoError in ipairs(self.hasCalledNoErrorResultList) do
         if not calledWithErrorOrNoError.isNoError then
             print("error detail")

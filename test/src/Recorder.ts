@@ -41,7 +41,6 @@ export default class Recorder {
   }
   printResult() {
 
-    const calledWithErrorList = this.hasCalledNoErrorResultList.filter(({ isNoError }) => !isNoError);
     for (let calledWithErrorOrNoError of this.hasCalledNoErrorResultList) {
       if (!calledWithErrorOrNoError.isNoError) {
         console.log("error detail");
