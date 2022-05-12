@@ -1,0 +1,24 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get install -y tshark
+        timeout-minutes: 1
+      - uses: actions/checkout@v3
+        timeout-minutes: 1
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+        timeout-minutes: 1
+      - run: npm ci
+        timeout-minutes: 1
+      - run: npm test
+        timeout-minutes: 10
+
