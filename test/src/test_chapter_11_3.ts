@@ -39,6 +39,6 @@ test_chapter_11_3();
 recorder.printResult();
 if(gui_enabled()){
   //exit wireshark
-  os.exit();
+  os.exit(0);
 }
 

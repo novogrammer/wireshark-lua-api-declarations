@@ -44,6 +44,6 @@ end
 test_chapter_11_3()
 recorder:printResult()
 if gui_enabled() then
-    os.exit()
+    os.exit(0)
 end
 return ____exports
