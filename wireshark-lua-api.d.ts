@@ -722,7 +722,7 @@ declare interface FieldInfo {
   readonly big_endian: boolean;
   readonly name: string;
 }
-declare function all_field_infos(this: void): any;
+declare function all_field_infos(this: void): LuaMultiReturn<FieldInfo[]>;
 // #endregion
 
 // #region 11.3. GUI Support
