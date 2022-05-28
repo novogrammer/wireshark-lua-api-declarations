@@ -12,7 +12,6 @@ PARENT=$(cd $(dirname $0)/.. && pwd)
 COMMAND_LIST=(
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_1.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_2.lua"
-  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_2.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_4.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_5.lua"
