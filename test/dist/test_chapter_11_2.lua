@@ -3,7 +3,6 @@ require("lualib_bundle");
 local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
-local DUMMYFILE_PATH = "/tmp/dummyfile"
 local recorder = __TS__New(Recorder)
 local field
 local function test_chapter_11_2_outside()
@@ -240,7 +239,6 @@ end
 chapter_11_2_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_2()
     recorder:printResult()
-    os.remove(DUMMYFILE_PATH)
     return 0
 end
 register_postdissector(chapter_11_2_proto)

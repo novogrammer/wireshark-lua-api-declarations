@@ -1,8 +1,6 @@
 
 import Recorder from "./Recorder";
 
-const DUMMYFILE_PATH = "/tmp/dummyfile";
-
 const recorder = new Recorder();
 
 
@@ -171,7 +169,6 @@ chapter_11_2_proto.init = function () {
 chapter_11_2_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {
   test_chapter_11_2();
   recorder.printResult();
-  os.remove(DUMMYFILE_PATH)
   return 0;
 }
 
