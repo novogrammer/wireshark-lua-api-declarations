@@ -76,7 +76,13 @@ function test_chapter_11_1_2(this: void) {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,undefined,undefined,undefined,undefined,1);
   });
   recorder.tryPcall("PseudoHeader.mtp2()", () => {
-    throw "todo";
+    const pseudoHeader = PseudoHeader.mtp2();
+  });
+  recorder.tryPcall("PseudoHeader.mtp2(nil,annexa)", () => {
+    const pseudoHeader = PseudoHeader.mtp2(undefined,1);
+  });
+  recorder.tryPcall("PseudoHeader.mtp2(nil,nil,linknum)", () => {
+    const pseudoHeader = PseudoHeader.mtp2(undefined,undefined,1);
   });
 
 }

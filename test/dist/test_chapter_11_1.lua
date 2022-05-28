@@ -160,7 +160,19 @@ local function test_chapter_11_1_2()
     recorder:tryPcall(
         "PseudoHeader.mtp2()",
         function()
-            error("todo", 0)
+            local pseudoHeader = PseudoHeader.mtp2()
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.mtp2(nil,annexa)",
+        function()
+            local pseudoHeader = PseudoHeader.mtp2(nil, 1)
+        end
+    )
+    recorder:tryPcall(
+        "PseudoHeader.mtp2(nil,nil,linknum)",
+        function()
+            local pseudoHeader = PseudoHeader.mtp2(nil, nil, 1)
         end
     )
 end
