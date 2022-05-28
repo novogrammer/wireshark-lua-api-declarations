@@ -5,6 +5,10 @@ local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
 local recorder = __TS__New(Recorder)
 local function test_chapter_11_3_1()
+    if not gui_enabled() then
+        print("Skip GUI test, because of gui is disabled.")
+        return
+    end
     recorder:tryPcall(
         "foo",
         function()
@@ -13,6 +17,10 @@ local function test_chapter_11_3_1()
     )
 end
 local function test_chapter_11_3_2()
+    if not gui_enabled() then
+        print("Skip GUI test, because of gui is disabled.")
+        return
+    end
     recorder:tryPcall(
         "foo",
         function()
@@ -27,6 +35,10 @@ local function test_chapter_11_3_3()
             local enabled = gui_enabled()
         end
     )
+    if not gui_enabled() then
+        print("Skip GUI test, because of gui is disabled.")
+        return
+    end
     recorder:tryPcall(
         "foo",
         function()
