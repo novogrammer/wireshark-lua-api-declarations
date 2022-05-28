@@ -1,8 +1,8 @@
 version: '3.8'
 services:
-  tshark:
-    build: ./tshark/
-    container_name: wireshark-lua-api-declarations-tshark
+  wireshark:
+    build: ./wireshark/
+    container_name: wireshark-lua-api-declarations-wireshark
     # restart: always
     volumes:
       - ./test/dist:/test/dist
