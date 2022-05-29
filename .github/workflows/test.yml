@@ -8,7 +8,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get install -y tshark wireshark
+      - run: sudo apt-get install -y tshark xvfb wireshark
         timeout-minutes: 5
       - uses: actions/checkout@v3
         timeout-minutes: 1

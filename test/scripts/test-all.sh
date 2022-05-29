@@ -8,6 +8,11 @@ PARENT=$(cd $(dirname $0)/.. && pwd)
 
 # tshark -r $PARENT/captures/empty.pcap  -X lua_script:$PARENT/dist/test_chapter_11_1.lua
 
+XVFB_RUN=
+if command -v xvfb-run &> /dev/null; then
+  echo "EXISTS!!!!"
+  XVFB_RUN=xvfb-run
+fi
 
 COMMAND_LIST=(
   # tshark
@@ -27,7 +32,7 @@ COMMAND_LIST=(
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_14.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_15.lua"
   # wireshark
-  "wireshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
+  "$XVFB_RUN wireshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
 )
 
 output_list=()
