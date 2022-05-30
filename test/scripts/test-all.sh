@@ -10,7 +10,6 @@ PARENT=$(cd $(dirname $0)/.. && pwd)
 
 XVFB_RUN=
 if command -v xvfb-run &> /dev/null; then
-  echo "EXISTS!!!!"
   XVFB_RUN=xvfb-run
 fi
 
