@@ -156,23 +156,11 @@ function test_chapter_11_3_3(this: void) {
   recorder.tryPcall("copy_to_clipboard()", () => {
     copy_to_clipboard("hello");
   });
-  recorder.tryPcall("open_capture_file(filename,filter)", () => {
-    throw "remove runtime error";
-    open_capture_file("./test/captures/http.pcap","");
-  });
   recorder.tryPcall("get_filter()", () => {
     get_filter();
   });  
   recorder.tryPcall("set_filter(filter)", () => {
     set_filter("tcp.port eq 80")
-  });  
-  recorder.tryPcall("get_color_filter_slot(row)", () => {
-    throw "remove runtime error";
-    get_color_filter_slot(1);
-  });  
-  recorder.tryPcall("set_color_filter_slot(row,text)", () => {
-    throw "remove runtime error";
-    set_color_filter_slot(1,"tcp.port");
   });  
   recorder.tryPcall("apply_filter()", () => {
     apply_filter();
@@ -187,16 +175,14 @@ function test_chapter_11_3_3(this: void) {
   recorder.tryPcall("redissect_packets()", () => {
     redissect_packets();
   });
-  recorder.tryPcall("reload_lua_plugins()", () => {
-    throw "remove runtime error";
-    reload_lua_plugins();
-  });
   recorder.tryPcall("browser_open_url(url)", () => {
-    browser_open_url("https://example.com/");
+    browser_open_url("https://example.com/browser_open_url");
   });
   recorder.tryPcall("browser_open_data_file(filename)", () => {
     browser_open_data_file("invalidfilename");
   });
+
+  console.log("Skip some test, run test_chapter_11_3_click by your hand.");
 
 }
 
@@ -214,12 +200,11 @@ test_chapter_11_3();
 
 const chapter_11_3_proto = Proto.new("chapter_11_3_proto", "test");
 chapter_11_3_proto.init = function () {
-
   recorder.printResult();
   if(gui_enabled()){
     //exit wireshark
     os.exit(0);
-  }
+  }  
 }
 
 chapter_11_3_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {

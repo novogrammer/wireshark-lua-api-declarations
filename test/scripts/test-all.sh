@@ -32,6 +32,8 @@ COMMAND_LIST=(
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_15.lua"
   # wireshark
   "$XVFB_RUN wireshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
+  # need click by hand
+  # "$XVFB_RUN wireshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3_click.lua"
 )
 
 output_list=()

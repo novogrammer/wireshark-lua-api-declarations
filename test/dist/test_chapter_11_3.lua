@@ -245,13 +245,6 @@ local function test_chapter_11_3_3()
         end
     )
     recorder:tryPcall(
-        "open_capture_file(filename,filter)",
-        function()
-            error("remove runtime error", 0)
-            open_capture_file("./test/captures/http.pcap", "")
-        end
-    )
-    recorder:tryPcall(
         "get_filter()",
         function()
             get_filter()
@@ -261,20 +254,6 @@ local function test_chapter_11_3_3()
         "set_filter(filter)",
         function()
             set_filter("tcp.port eq 80")
-        end
-    )
-    recorder:tryPcall(
-        "get_color_filter_slot(row)",
-        function()
-            error("remove runtime error", 0)
-            get_color_filter_slot(1)
-        end
-    )
-    recorder:tryPcall(
-        "set_color_filter_slot(row,text)",
-        function()
-            error("remove runtime error", 0)
-            set_color_filter_slot(1, "tcp.port")
         end
     )
     recorder:tryPcall(
@@ -302,16 +281,9 @@ local function test_chapter_11_3_3()
         end
     )
     recorder:tryPcall(
-        "reload_lua_plugins()",
-        function()
-            error("remove runtime error", 0)
-            reload_lua_plugins()
-        end
-    )
-    recorder:tryPcall(
         "browser_open_url(url)",
         function()
-            browser_open_url("https://example.com/")
+            browser_open_url("https://example.com/browser_open_url")
         end
     )
     recorder:tryPcall(
@@ -320,6 +292,7 @@ local function test_chapter_11_3_3()
             browser_open_data_file("invalidfilename")
         end
     )
+    print("Skip some test, run test_chapter_11_3_click by your hand.")
 end
 local function test_chapter_11_3()
     print("begin test_chapter_11_3")
