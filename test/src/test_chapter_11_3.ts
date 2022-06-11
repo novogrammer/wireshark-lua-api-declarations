@@ -172,9 +172,6 @@ function test_chapter_11_3_3(this: void) {
   recorder.tryPcall("reload_packets()", () => {
     reload_packets();
   });
-  recorder.tryPcall("redissect_packets()", () => {
-    redissect_packets();
-  });
   recorder.tryPcall("browser_open_url(url)", () => {
     browser_open_url("https://example.com/browser_open_url");
   });

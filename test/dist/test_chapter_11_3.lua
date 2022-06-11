@@ -275,12 +275,6 @@ local function test_chapter_11_3_3()
         end
     )
     recorder:tryPcall(
-        "redissect_packets()",
-        function()
-            redissect_packets()
-        end
-    )
-    recorder:tryPcall(
         "browser_open_url(url)",
         function()
             browser_open_url("https://example.com/browser_open_url")

@@ -34,6 +34,12 @@ local function test_chapter_11_3_3_click()
         end
     )
     recorder:tryPcall(
+        "redissect_packets()",
+        function()
+            redissect_packets()
+        end
+    )
+    recorder:tryPcall(
         "reload_lua_plugins()",
         function()
             reload_lua_plugins()

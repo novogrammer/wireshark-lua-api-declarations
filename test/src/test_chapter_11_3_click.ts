@@ -22,7 +22,11 @@ function test_chapter_11_3_3_click(this: void) {
   });  
   recorder.tryPcall("set_color_filter_slot(row,text)", () => {
     set_color_filter_slot(1,"tcp.port");
-  });  
+  });
+  recorder.tryPcall("redissect_packets()", () => {
+    redissect_packets();
+  });
+
   recorder.tryPcall("reload_lua_plugins()", () => {
     reload_lua_plugins();
   });
