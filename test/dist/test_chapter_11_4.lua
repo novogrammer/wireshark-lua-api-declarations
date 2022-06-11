@@ -4,8 +4,6 @@ local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
 local recorder = __TS__New(Recorder)
-local function test_chapter_11_4_outside()
-end
 local function test_chapter_11_4_1()
     recorder:tryPcall(
         "Listener.new()",
@@ -22,7 +20,7 @@ local function test_chapter_11_4_1()
     recorder:tryPcall(
         "Listener.new(nil,filter)",
         function()
-            local listener = Listener.new(nil, "m2tp")
+            local listener = Listener.new(nil, "")
         end
     )
     recorder:tryPcall(
@@ -87,7 +85,6 @@ local function test_chapter_11_4()
     test_chapter_11_4_1()
     print("end test_chapter_11_4")
 end
-test_chapter_11_4_outside()
 local chapter_11_2_proto = Proto.new("chapter_11_2_proto", "test")
 chapter_11_2_proto.init = function(self)
 end

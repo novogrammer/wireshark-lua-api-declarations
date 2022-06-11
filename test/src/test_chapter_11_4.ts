@@ -3,18 +3,6 @@ import Recorder from "./Recorder";
 
 const recorder = new Recorder();
 
-
-// let field:Field;
-
-function test_chapter_11_4_outside(this:void){
-  // console.log("begin test_chapter_11_4_outside");
-
-  // recorder.tryPcall("Field.new(fieldname)", () => {
-  //   field = Field.new("http.request");
-  // });
-  // console.log("end test_chapter_11_4_outside");
-}
-
 function test_chapter_11_4_1(this: void) {
   recorder.tryPcall("Listener.new()", () => {
     const listener=Listener.new();
@@ -23,7 +11,7 @@ function test_chapter_11_4_1(this: void) {
     const listener=Listener.new("http");
   });
   recorder.tryPcall("Listener.new(nil,filter)", () => {
-    const listener=Listener.new(undefined,"m2tp");
+    const listener=Listener.new(undefined,"");
   });
   recorder.tryPcall("Listener.new(nil,nil,allfields)", () => {
     const listener=Listener.new(undefined,undefined,true);
@@ -72,7 +60,6 @@ function test_chapter_11_4(this: void) {
   console.log("end test_chapter_11_4");
 }
 
-test_chapter_11_4_outside();
 
 
 const chapter_11_2_proto = Proto.new("chapter_11_2_proto", "test");
