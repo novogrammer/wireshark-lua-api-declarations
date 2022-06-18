@@ -883,7 +883,7 @@ declare interface Pinfo {
   readonly in_error_pkt: boolean;
   readonly match_uint: guint32;
   readonly match_string: string;
-  port_type: port_type;
+  readonly port_type: port_type;
   src_port: guint32;
   dst_port: guint32;
   dl_src: Address;
@@ -897,7 +897,7 @@ declare interface Pinfo {
   readonly columns: Columns;
   readonly cols: Columns;
   readonly private: PrivateTable;
-  hi: Address;
+  readonly hi: Address;
   readonly lo: Address;
   //Mode: Assign only.
   conversation: Proto;
