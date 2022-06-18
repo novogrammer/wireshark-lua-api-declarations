@@ -85,13 +85,13 @@ local function test_chapter_11_4()
     test_chapter_11_4_1()
     print("end test_chapter_11_4")
 end
-local chapter_11_2_proto = Proto.new("chapter_11_2_proto", "test")
-chapter_11_2_proto.init = function(self)
+local chapter_11_4_proto = Proto.new("chapter_11_4_proto", "test")
+chapter_11_4_proto.init = function(self)
 end
-chapter_11_2_proto.dissector = function(buffer, pinfo, tree)
+chapter_11_4_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_4()
     recorder:printResult()
     return 0
 end
-register_postdissector(chapter_11_2_proto)
+register_postdissector(chapter_11_4_proto)
 return ____exports

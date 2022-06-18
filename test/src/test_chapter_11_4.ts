@@ -62,17 +62,17 @@ function test_chapter_11_4(this: void) {
 
 
 
-const chapter_11_2_proto = Proto.new("chapter_11_2_proto", "test");
-chapter_11_2_proto.init = function () {
+const chapter_11_4_proto = Proto.new("chapter_11_4_proto", "test");
+chapter_11_4_proto.init = function () {
 
 }
 
-chapter_11_2_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {
+chapter_11_4_proto.dissector = function (this: void, buffer: Tvb, pinfo: Pinfo, tree: TreeItem): number {
   test_chapter_11_4();
   recorder.printResult();
   return 0;
 }
 
-register_postdissector(chapter_11_2_proto);
+register_postdissector(chapter_11_4_proto);
 
 
