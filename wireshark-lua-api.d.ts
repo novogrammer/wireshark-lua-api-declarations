@@ -837,13 +837,14 @@ declare interface Column {
 }
 
 // set string, get Column.
-declare interface Columns extends LuaTable<string, Column | string> {
+declare interface Columns {
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
-  // why string?
   // __newindex(column:string,text:string):void;
+  set: LuaTableSetMethod<string, string>;
   // __index(column:string):Column;
+  get: LuaTableGetMethod<string, Column>;
 }
 declare interface NSTime {
   (this: void, seconds?: time_t, nseconds?: int): NSTime;
@@ -972,10 +973,11 @@ interface PrefConstructor {
 
 }
 declare const Pref: PrefConstructor;
-declare interface Prefs extends LuaTable<string, Pref|PrefValueType> {
+declare interface Prefs {
   // __newindex(name:string,pref:Pref):void;
-  // why?
+  set: LuaTableSetMethod<string, Pref>;
   // __index(name:string):PrefValueType;
+  get: LuaTableGetMethod<string, PrefValueType>;
 }
 
 declare interface Proto {
