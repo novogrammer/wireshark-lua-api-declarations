@@ -234,7 +234,7 @@ local function test_chapter_11_2()
 end
 test_chapter_11_2_outside()
 local chapter_11_2_proto = Proto.new("chapter_11_2_proto", "test")
-chapter_11_2_proto.init = function(self)
+chapter_11_2_proto.init = function()
 end
 chapter_11_2_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_2()

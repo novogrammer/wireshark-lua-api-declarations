@@ -577,7 +577,7 @@ local function test_chapter_11_5(pinfo)
     print("end test_chapter_11_5")
 end
 chapter_11_5_proto = Proto.new("chapter_11_5_proto", "test")
-chapter_11_5_proto.init = function(self)
+chapter_11_5_proto.init = function()
 end
 chapter_11_5_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_5(pinfo)

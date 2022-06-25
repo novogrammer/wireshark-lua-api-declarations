@@ -86,7 +86,7 @@ local function test_chapter_11_4()
     print("end test_chapter_11_4")
 end
 local chapter_11_4_proto = Proto.new("chapter_11_4_proto", "test")
-chapter_11_4_proto.init = function(self)
+chapter_11_4_proto.init = function()
 end
 chapter_11_4_proto.dissector = function(buffer, pinfo, tree)
     test_chapter_11_4()

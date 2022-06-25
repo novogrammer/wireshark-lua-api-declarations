@@ -18,7 +18,7 @@ type float = number;
 type bitfield = guint32 | UInt64;
 type char = number;
 type Timestamp = number;
-type Action = () => void;
+type Action = (this:void) => void;
 
 
 type GetLenFunction = (this: void, tvb: Tvb, pinfo: Pinfo, offset: int) => int;
@@ -918,7 +918,7 @@ declare interface PrivateTable {
 
 declare interface Dissector {
   call(tvb: Tvb, pinfo: Pinfo, tree: TreeItem): int;
-  (tvb: Tvb, pinfo: Pinfo, tree: TreeItem): int;
+  (this: void,tvb: Tvb, pinfo: Pinfo, tree: TreeItem): int;
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
@@ -958,11 +958,13 @@ type PrefValueType = boolean | guint32 | string;
 declare interface Pref {
 
 }
+type EnumElement = [number,string,number];
+type Enum = EnumElement[];
 interface PrefConstructor {
   bool: (this: void, label: string, default_: boolean, descr: string) => Pref;
   uint: (this: void, label: string, default_: guint32, descr: string) => Pref;
   string: (this: void, label: string, default_: string, descr: string) => Pref;
-  enum: (this: void, label: string, default_: guint32, descr: string, enum_: LuaTable<number, LuaTable<number, any>>, radio: boolean) => Pref;
+  enum: (this: void, label: string, default_: guint32, descr: string, enum_: Enum, radio: boolean) => Pref;
   range: (this: void, label: string, default_: string, descr: string, max: guint32) => Pref;
   statictext: (this: void, label: string, descr: string) => Pref;
 
@@ -974,7 +976,7 @@ declare interface Prefs extends LuaTable<string, Pref> {
 }
 
 declare interface Proto {
-  (name: string, desc: string): Proto;
+  (this:void,name: string, desc: string): Proto;
   register_heuristic(listname: string, func: HeuristicDissectorFunction): void;
   dissector: DissectorFunction;
   readonly prefs: Prefs;
@@ -1026,7 +1028,7 @@ interface ProtoFieldConstructor {
   int24: (this: void, abbr: string, name?: string, base?: base, valuestring?: ValuestringType, mask?: guint32, desc?: string) => ProtoField;
   int32: (this: void, abbr: string, name?: string, base?: base, valuestring?: ValuestringType, mask?: guint32, desc?: string) => ProtoField;
   int64: (this: void, abbr: string, name?: string, base?: base, valuestring?: ValuestringType, mask?: guint32, desc?: string) => ProtoField;
-  framenum: (this: void, abbr: string, name?: string, base?: base, valuestring?: ValuestringType, mask?: guint32, desc?: string) => ProtoField;
+  framenum: (this: void, abbr: string, name?: string, base?: base, frametype?:frametype, mask?: guint32, desc?: string) => ProtoField;
   bool: (this: void, abbr: string, name?: string, display?: base, valuestring?: ValuestringType, mask?: guint32, desc?: string) => ProtoField;
   absolute_time: (this: void, abbr: string, name?: string, base?: base, desc?: string) => ProtoField;
   relative_time: (this: void, abbr: string, name?: string, desc?: string) => ProtoField;
@@ -1122,7 +1124,7 @@ declare interface Tvb {
   reported_length_remaining(): gint;
   bytes(offset?: int, length?: int): ByteArray;
   offset(): gint;
-  (offset?: int, length?: int): TvbRange;
+  (this:void, offset?: int, length?: int): TvbRange;
   range(offset?: int, length?: int): TvbRange;
   raw(offset?: int, length?: int): string;
   // __eq(rhs:Tvb):boolean;

@@ -46,7 +46,7 @@ function test_chapter_11_3_click(this: void) {
 if(gui_enabled()){
   const textWindow = TextWindow.new();
   let isCalled=false;
-  const myCallback=()=>{
+  const myCallback=function(this:void){
     if(isCalled){
       return;
     }

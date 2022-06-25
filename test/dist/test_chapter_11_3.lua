@@ -297,7 +297,7 @@ local function test_chapter_11_3()
 end
 test_chapter_11_3()
 local chapter_11_3_proto = Proto.new("chapter_11_3_proto", "test")
-chapter_11_3_proto.init = function(self)
+chapter_11_3_proto.init = function()
     recorder:printResult()
     if gui_enabled() then
         os.exit(0)
