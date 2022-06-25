@@ -15,10 +15,17 @@ function test_chapter_11_3_3_click(this: void) {
   }
 
   recorder.tryPcall("open_capture_file(filename,filter)", () => {
-    open_capture_file("./test/captures/http.pcap","");
+    const result=open_capture_file("./test/captures/http.pcap","");
+    if(type(result)!="boolean"){
+      throw "not boolean";
+    }
   });
   recorder.tryPcall("get_color_filter_slot(row)", () => {
-    get_color_filter_slot(1);
+    set_color_filter_slot(1,"tcp.port");
+    const s=get_color_filter_slot(1);
+    if(type(s)!="string"){
+      throw "not string";
+    }
   });  
   recorder.tryPcall("set_color_filter_slot(row,text)", () => {
     set_color_filter_slot(1,"tcp.port");

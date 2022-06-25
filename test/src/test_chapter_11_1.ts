@@ -8,6 +8,9 @@ const recorder = new Recorder();
 function test_chapter_11_1_1(this: void) {
   recorder.tryPcall("Dumper.new(filename)", () => {
     const dumper = Dumper.new(DUMMYFILE_PATH);
+    if(type(dumper)!="userdata"){
+      throw 'not userdata';
+    }
     dumper.close();
   });
   recorder.tryPcall("Dumper.new(filename,filetype)", () => {
@@ -44,45 +47,87 @@ function test_chapter_11_1_1(this: void) {
 function test_chapter_11_1_2(this: void) {
   recorder.tryPcall("PseudoHeader.none()", () => {
     const pseudoHeader = PseudoHeader.none();
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.eth(fcslen)", () => {
     const pseudoHeader = PseudoHeader.eth(1000);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.eth()", () => {
     const pseudoHeader = PseudoHeader.eth();
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm()", () => {
     const pseudoHeader = PseudoHeader.atm();
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(aal)", () => {
     const pseudoHeader = PseudoHeader.atm(1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,vpi)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,nil,vci)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,nil,nil,channel)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,nil,nil,nil,cells)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,nil,nil,nil,nil,aal5u2u)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,undefined,undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.atm(nil,nil,nil,nil,nil,nil,aal5len)", () => {
     const pseudoHeader = PseudoHeader.atm(undefined,undefined,undefined,undefined,undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.mtp2()", () => {
     const pseudoHeader = PseudoHeader.mtp2();
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.mtp2(nil,annexa)", () => {
     const pseudoHeader = PseudoHeader.mtp2(undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
   recorder.tryPcall("PseudoHeader.mtp2(nil,nil,linknum)", () => {
     const pseudoHeader = PseudoHeader.mtp2(undefined,undefined,1);
+    if(type(pseudoHeader)!="userdata"){
+      throw 'not userdata';
+    }
   });
 
 }

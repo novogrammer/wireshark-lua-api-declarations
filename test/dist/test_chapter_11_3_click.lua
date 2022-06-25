@@ -18,13 +18,20 @@ local function test_chapter_11_3_3_click()
     recorder:tryPcall(
         "open_capture_file(filename,filter)",
         function()
-            open_capture_file("./test/captures/http.pcap", "")
+            local result = open_capture_file("./test/captures/http.pcap", "")
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
         "get_color_filter_slot(row)",
         function()
-            get_color_filter_slot(1)
+            set_color_filter_slot(1, "tcp.port")
+            local s = get_color_filter_slot(1)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(

@@ -10,6 +10,9 @@ local function test_chapter_11_1_1()
         "Dumper.new(filename)",
         function()
             local dumper = Dumper.new(DUMMYFILE_PATH)
+            if type(dumper) ~= "userdata" then
+                error("not userdata", 0)
+            end
             dumper:close()
         end
     )
@@ -74,48 +77,72 @@ local function test_chapter_11_1_2()
         "PseudoHeader.none()",
         function()
             local pseudoHeader = PseudoHeader.none()
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.eth(fcslen)",
         function()
             local pseudoHeader = PseudoHeader.eth(1000)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.eth()",
         function()
             local pseudoHeader = PseudoHeader.eth()
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.atm()",
         function()
             local pseudoHeader = PseudoHeader.atm()
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.atm(aal)",
         function()
             local pseudoHeader = PseudoHeader.atm(1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.atm(nil,vpi)",
         function()
             local pseudoHeader = PseudoHeader.atm(nil, 1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.atm(nil,nil,vci)",
         function()
             local pseudoHeader = PseudoHeader.atm(nil, nil, 1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.atm(nil,nil,nil,channel)",
         function()
             local pseudoHeader = PseudoHeader.atm(nil, nil, nil, 1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -128,6 +155,9 @@ local function test_chapter_11_1_2()
                 nil,
                 1
             )
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -141,6 +171,9 @@ local function test_chapter_11_1_2()
                 nil,
                 1
             )
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -155,24 +188,36 @@ local function test_chapter_11_1_2()
                 nil,
                 1
             )
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.mtp2()",
         function()
             local pseudoHeader = PseudoHeader.mtp2()
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.mtp2(nil,annexa)",
         function()
             local pseudoHeader = PseudoHeader.mtp2(nil, 1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "PseudoHeader.mtp2(nil,nil,linknum)",
         function()
             local pseudoHeader = PseudoHeader.mtp2(nil, nil, 1)
+            if type(pseudoHeader) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
 end

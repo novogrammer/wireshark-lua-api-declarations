@@ -6,21 +6,36 @@ const recorder = new Recorder();
 function test_chapter_11_4_1(this: void) {
   recorder.tryPcall("Listener.new()", () => {
     const listener=Listener.new();
+    if(type(listener)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Listener.new(tap)", () => {
     const listener=Listener.new("http");
+    if(type(listener)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Listener.new(nil,filter)", () => {
     const listener=Listener.new(undefined,"");
+    if(type(listener)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Listener.new(nil,nil,allfields)", () => {
     const listener=Listener.new(undefined,undefined,true);
+    if(type(listener)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Listener.list()", () => {
     const list=Listener.list();
     // for(let [_,tapname] of pairs(list)){
     //   console.log(_,tapname);
     // }
+    if(type(list)!="table"){
+      throw "not table";
+    }
   });
   recorder.tryPcall("listener:remove", () => {
     const listener=Listener.new();

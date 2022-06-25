@@ -738,16 +738,18 @@ interface ProgDlgConstructor {
 }
 declare const ProgDlg: ProgDlgConstructor;
 
+// some methods should return TextWindow..
+// 
 declare interface TextWindow {
   set_atclose(action: Action): void;
-  set(text: string): TextWindow;
-  append(text: string): TextWindow;
-  prepend(text: string): TextWindow;
-  clear(): TextWindow;
+  set(text: string): void;// TextWindow
+  append(text: string): void;// TextWindow
+  prepend(text: string): void;// TextWindow
+  clear(): void;// TextWindow
   get_text(): string;
   close(): void;
-  set_editable(editable?: boolean): TextWindow;
-  add_button(label: string, function_: Action): TextWindow;
+  set_editable(editable?: boolean): void;// TextWindow
+  add_button(label: string, function_: Action): void;// TextWindow
 }
 interface TextWindowConstructor {
   new: (this: void, title?: string) => TextWindow;
@@ -763,7 +765,7 @@ declare function copy_to_clipboard(this: void, text: string): void
 declare function open_capture_file(this: void, filename: string, filter: string): boolean;
 declare function get_filter(this: void): string;
 declare function set_filter(this: void, filter: string): void;
-declare function get_color_filter_slot(this: void, row: guint8): string;
+declare function get_color_filter_slot(this: void, row: guint8): string|null;
 declare function set_color_filter_slot(this: void, row: guint8, text: string): void;
 declare function apply_filter(this: void): void;
 /**
@@ -882,7 +884,7 @@ declare interface Pinfo {
   readonly fragmented: boolean;
   readonly in_error_pkt: boolean;
   readonly match_uint: guint32;
-  readonly match_string: string;
+  readonly match_string: string|null;
   readonly port_type: port_type;
   src_port: guint32;
   dst_port: guint32;

@@ -4,9 +4,6 @@ local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
 local recorder = __TS__New(Recorder)
-local function sleep(self, n)
-    os.execute("sleep " .. tostring(tonumber(n)))
-end
 local function test_chapter_11_3_1()
     if not gui_enabled() then
         print("Skip GUI test, because of gui is disabled.")
@@ -16,6 +13,9 @@ local function test_chapter_11_3_1()
         "ProgDlg.new()",
         function()
             local progDlg = ProgDlg.new()
+            if type(progDlg) ~= "userdata" then
+                error("not userdata", 0)
+            end
             progDlg:close()
         end
     )
@@ -23,6 +23,9 @@ local function test_chapter_11_3_1()
         "ProgDlg.new(title)",
         function()
             local progDlg = ProgDlg.new("title")
+            if type(progDlg) ~= "userdata" then
+                error("not userdata", 0)
+            end
             progDlg:close()
         end
     )
@@ -30,6 +33,9 @@ local function test_chapter_11_3_1()
         "ProgDlg.new(nil,task)",
         function()
             local progDlg = ProgDlg.new(nil, "task")
+            if type(progDlg) ~= "userdata" then
+                error("not userdata", 0)
+            end
             progDlg:close()
         end
     )
@@ -53,7 +59,10 @@ local function test_chapter_11_3_1()
         "progdlg:stopped()",
         function()
             local progDlg = ProgDlg.new()
-            progDlg:stopped()
+            local result = progDlg:stopped()
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
+            end
             progDlg:close()
         end
     )
@@ -74,6 +83,9 @@ local function test_chapter_11_3_2()
         "TextWindow.new()",
         function()
             local textWindow = TextWindow.new()
+            if type(textWindow) ~= "userdata" then
+                error("not userdata", 0)
+            end
             textWindow:close()
         end
     )
@@ -81,6 +93,9 @@ local function test_chapter_11_3_2()
         "TextWindow.new(title)",
         function()
             local textWindow = TextWindow.new("title")
+            if type(textWindow) ~= "userdata" then
+                error("not userdata", 0)
+            end
             textWindow:close()
         end
     )
@@ -125,7 +140,7 @@ local function test_chapter_11_3_2()
         end
     )
     recorder:tryPcall(
-        "textwindow:clear(text)",
+        "textwindow:clear()",
         function()
             local textWindow = TextWindow.new()
             textWindow:set("set")

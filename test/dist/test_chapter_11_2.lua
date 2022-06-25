@@ -11,6 +11,9 @@ local function test_chapter_11_2_outside()
         "Field.new(fieldname)",
         function()
             field = Field.new("http.request")
+            if type(field) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     print("end test_chapter_11_2_outside")
@@ -20,26 +23,35 @@ local function test_chapter_11_2_1()
         "Field.list()",
         function()
             local list = Field.list()
+            if type(list) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(
         "field:__call()",
         function()
             local fieldinfo = field()
+            if type(fieldinfo) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "field:__tostring()",
         function()
             local s = tostring(field)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
         "field.name",
         function()
             local name = field.name
-            if name == nil then
-                error("name is null", 0)
+            if type(name) ~= "string" then
+                error("not string", 0)
             end
         end
     )
@@ -47,17 +59,17 @@ local function test_chapter_11_2_1()
         "field.display",
         function()
             local display = field.display
-            if display == nil then
-                error("display is null", 0)
+            if type(display) ~= "string" then
+                error("not string", 0)
             end
         end
     )
     recorder:tryPcall(
         "field.type",
         function()
-            local ____type = field.type
-            if ____type == nil then
-                error("type is null", 0)
+            local t = field.type
+            if type(t) ~= "number" then
+                error("not number", 0)
             end
         end
     )
@@ -68,6 +80,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local length = #fieldinfo
+            if type(length) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -75,6 +90,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local unm = -fieldinfo
+            if type(unm) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -82,6 +100,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local value = fieldinfo()
+            if value == nil then
+                error("value is null", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -89,6 +110,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local s = tostring(fieldinfo)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -96,6 +120,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local result = fieldinfo == fieldinfo
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -103,6 +130,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local result = fieldinfo <= fieldinfo
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -110,6 +140,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local result = fieldinfo < fieldinfo
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -117,6 +150,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local len = fieldinfo.len
+            if type(len) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -124,6 +160,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local offset = fieldinfo.offset
+            if type(offset) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -131,6 +170,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local value = fieldinfo.value
+            if value == nil then
+                error("value is null", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -138,6 +180,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local label = fieldinfo.label
+            if type(label) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -145,13 +190,19 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local display = fieldinfo.display
+            if type(display) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
         "fieldinfo.display",
         function()
             local fieldinfo = field()
-            local ____type = fieldinfo.type
+            local t = fieldinfo.type
+            if type(t) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -159,6 +210,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local source = fieldinfo.source
+            if type(source) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -166,6 +220,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local range = fieldinfo.range
+            if type(range) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -173,6 +230,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local generated = fieldinfo.generated
+            if type(generated) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -180,6 +240,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local hidden = fieldinfo.hidden
+            if type(hidden) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -187,6 +250,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local is_url = fieldinfo.is_url
+            if type(is_url) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -194,6 +260,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local little_endian = fieldinfo.little_endian
+            if type(little_endian) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -201,6 +270,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local big_endian = fieldinfo.big_endian
+            if type(big_endian) ~= "boolean" then
+                error("not boolean", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -208,6 +280,9 @@ local function test_chapter_11_2_2()
         function()
             local fieldinfo = field()
             local name = fieldinfo.name
+            if type(name) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
 end
@@ -219,8 +294,8 @@ local function test_chapter_11_2_3()
             if #result == nil then
                 error("length is null", 0)
             end
-            if result[1].display == nil then
-                error("display is null", 0)
+            if type(result[1].display) ~= "string" then
+                error("not string", 0)
             end
         end
     )

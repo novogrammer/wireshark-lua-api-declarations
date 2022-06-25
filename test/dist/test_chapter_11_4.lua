@@ -9,30 +9,45 @@ local function test_chapter_11_4_1()
         "Listener.new()",
         function()
             local listener = Listener.new()
+            if type(listener) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Listener.new(tap)",
         function()
             local listener = Listener.new("http")
+            if type(listener) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Listener.new(nil,filter)",
         function()
             local listener = Listener.new(nil, "")
+            if type(listener) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Listener.new(nil,nil,allfields)",
         function()
             local listener = Listener.new(nil, nil, true)
+            if type(listener) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Listener.list()",
         function()
             local list = Listener.list()
+            if type(list) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(

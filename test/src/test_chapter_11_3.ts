@@ -3,10 +3,6 @@ import Recorder from "./Recorder";
 
 const recorder = new Recorder();
 
-function sleep(n:number):void{
-  os.execute(`sleep ${tonumber(n)}`)
-}
-
 function test_chapter_11_3_1(this: void) {
   if(!gui_enabled()){
     console.log("Skip GUI test, because of gui is disabled.");
@@ -14,14 +10,23 @@ function test_chapter_11_3_1(this: void) {
   }
   recorder.tryPcall("ProgDlg.new()", () => {
     const progDlg = ProgDlg.new();
+    if(type(progDlg)!="userdata"){
+      throw "not userdata";
+    }
     progDlg.close();
   });
   recorder.tryPcall("ProgDlg.new(title)", () => {
     const progDlg = ProgDlg.new("title");
+    if(type(progDlg)!="userdata"){
+      throw "not userdata";
+    }
     progDlg.close();
   });
   recorder.tryPcall("ProgDlg.new(nil,task)", () => {
     const progDlg = ProgDlg.new(undefined,"task");
+    if(type(progDlg)!="userdata"){
+      throw "not userdata";
+    }
     progDlg.close();
   });
   recorder.tryPcall("progdlg:update(progress)", () => {
@@ -36,7 +41,10 @@ function test_chapter_11_3_1(this: void) {
   });
   recorder.tryPcall("progdlg:stopped()", () => {
     const progDlg = ProgDlg.new();
-    progDlg.stopped();
+    const result=progDlg.stopped();
+    if(type(result)!="boolean"){
+      throw "not boolean";
+    }
     progDlg.close();
   });
   recorder.tryPcall("progdlg:close()", () => {
@@ -52,10 +60,16 @@ function test_chapter_11_3_2(this: void) {
   }
   recorder.tryPcall("TextWindow.new()", () => {
     const textWindow = TextWindow.new();
+    if(type(textWindow)!="userdata"){
+      throw "not userdata";
+    }
     textWindow.close();
   });
   recorder.tryPcall("TextWindow.new(title)", () => {
     const textWindow = TextWindow.new("title");
+    if(type(textWindow)!="userdata"){
+      throw "not userdata";
+    }
     textWindow.close();
   });
   recorder.tryPcall("textwindow:set_atclose(action)", () => {
@@ -89,7 +103,7 @@ function test_chapter_11_3_2(this: void) {
     }
     textWindow.close();
   });
-  recorder.tryPcall("textwindow:clear(text)", () => {
+  recorder.tryPcall("textwindow:clear()", () => {
     const textWindow = TextWindow.new();
     textWindow.set("set");
     textWindow.clear();

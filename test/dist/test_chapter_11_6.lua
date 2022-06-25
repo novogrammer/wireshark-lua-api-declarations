@@ -9,19 +9,28 @@ local function test_chapter_11_6_1()
         "Dissector.get(name)",
         function()
             local dissector = Dissector.get("http")
+            if type(dissector) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Dissector.list()",
         function()
             local list = Dissector.list()
+            if type(list) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(
         "dissector:__tostring()",
         function()
             local dissector = Dissector.get("http")
-            tostring(dissector)
+            local s = tostring(dissector)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
 end
@@ -29,56 +38,80 @@ local function test_chapter_11_6_2()
     recorder:tryPcall(
         "DissectorTable.new(tablename)",
         function()
-            DissectorTable.new("tablename01")
+            local dissectortable = DissectorTable.new("tablename01")
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.new(tablename,uiname)",
         function()
-            DissectorTable.new("tablename02", "bar")
+            local dissectortable = DissectorTable.new("tablename02", "bar")
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.new(tablename,nil,type)",
         function()
-            DissectorTable.new("tablename03", nil, ftypes.UINT8)
+            local dissectortable = DissectorTable.new("tablename03", nil, ftypes.UINT8)
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.new(tablename,nil,nil,base)",
         function()
-            DissectorTable.new("tablename04", nil, nil, base.NONE)
+            local dissectortable = DissectorTable.new("tablename04", nil, nil, base.NONE)
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.new(tablename,nil,nil,nil,proto)",
         function()
             local chapter_11_6_2_proto01 = Proto.new("chapter_11_6_2_proto01", "chapter_11_6_2_proto01")
-            DissectorTable.new(
+            local dissectortable = DissectorTable.new(
                 "tablename05",
                 nil,
                 nil,
                 nil,
                 chapter_11_6_2_proto01
             )
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.list()",
         function()
-            DissectorTable.list()
+            local list = DissectorTable.list()
+            if type(list) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.heuristic_list()",
         function()
-            DissectorTable.heuristic_list()
+            local list = DissectorTable.heuristic_list()
+            if type(list) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(
         "DissectorTable.get(tablename)",
         function()
-            DissectorTable.get("tablename01")
+            local dissectortable = DissectorTable.get("tablename01")
+            if type(dissectortable) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -138,7 +171,10 @@ local function test_chapter_11_6_2()
             end
             dissectortable:remove_all(dissector)
             dissectortable:add(1, dissector)
-            dissectortable:get_dissector(1)
+            local result = dissectortable:get_dissector(1)
+            if type(result) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -159,7 +195,10 @@ local function test_chapter_11_6_2()
             if dissectortable == nil then
                 error("dissectortable is null", 0)
             end
-            tostring(dissectortable)
+            local s = tostring(dissectortable)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
 end
@@ -167,19 +206,28 @@ local function test_chapter_11_6_3()
     recorder:tryPcall(
         "Pref.bool(label,default,descr)",
         function()
-            Pref.bool("label", true, "descr")
+            local pref = Pref.bool("label", true, "descr")
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Pref.uint(label,default,descr)",
         function()
-            Pref.uint("label", 1, "descr")
+            local pref = Pref.uint("label", 1, "descr")
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Pref.string(label,default,descr)",
         function()
-            Pref.string("label", "a", "descr")
+            local pref = Pref.string("label", "a", "descr")
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -188,25 +236,34 @@ local function test_chapter_11_6_3()
             local A = 1
             local B = 1
             local myEnum = {{0, "A", A}, {1, "B", B}}
-            Pref.enum(
+            local pref = Pref.enum(
                 "label",
                 A,
                 "descr",
                 myEnum,
                 true
             )
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Pref.range(label,default,descr,max)",
         function()
-            Pref.range("label", "1-2", "descr", 2)
+            local pref = Pref.range("label", "1-2", "descr", 2)
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "Pref.statictext(label,descr)",
         function()
-            Pref.statictext("label", "descr")
+            local pref = Pref.statictext("label", "descr")
+            if type(pref) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
 end
@@ -227,7 +284,10 @@ local function test_chapter_11_6_4()
             local prefs = chapter_11_6_4_proto02.prefs
             local pref = Pref.bool("label", true, "descr")
             prefs.a = pref
-            local ____ = prefs.a
+            local result = prefs.a
+            if type(result) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
 end
@@ -236,6 +296,9 @@ local function test_chapter_11_6_5()
         "Proto.new(name,desc)",
         function()
             local chapter_11_6_5_proto01 = Proto.new("chapter_11_6_5_proto01", "chapter_11_6_5_proto01")
+            if type(chapter_11_6_5_proto01) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -243,6 +306,9 @@ local function test_chapter_11_6_5()
         function()
             local chapter_11_6_5_proto02 = Proto.new("chapter_11_6_5_proto02", "chapter_11_6_5_proto02")
             local chapter_11_6_5_proto03 = chapter_11_6_5_proto02("chapter_11_6_5_proto03", "chapter_11_6_5_proto03")
+            if type(chapter_11_6_5_proto03) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -264,6 +330,9 @@ local function test_chapter_11_6_5()
             end
             chapter_11_6_5_proto05.dissector = d
             local d2 = chapter_11_6_5_proto05.dissector
+            if type(d2) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -287,6 +356,9 @@ local function test_chapter_11_6_5()
         function()
             local chapter_11_6_5_proto08 = Proto.new("chapter_11_6_5_proto08", "chapter_11_6_5_proto08")
             local name = chapter_11_6_5_proto08.name
+            if type(name) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -294,6 +366,9 @@ local function test_chapter_11_6_5()
         function()
             local chapter_11_6_5_proto09 = Proto.new("chapter_11_6_5_proto09", "chapter_11_6_5_proto09")
             local description = chapter_11_6_5_proto09.description
+            if type(description) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -304,6 +379,9 @@ local function test_chapter_11_6_5()
             fields[1] = ProtoField.int8("abbr")
             chapter_11_6_5_proto10.fields = fields
             local fields2 = chapter_11_6_5_proto10.fields
+            if type(fields2) ~= "table" then
+                error("not table", 0)
+            end
         end
     )
     recorder:tryPcall(
@@ -314,6 +392,9 @@ local function test_chapter_11_6_5()
             e[1] = ProtoExpert.new("abbr", "text", expert.group.DEBUG, expert.severity.NOTE)
             chapter_11_6_5_proto11.experts = e
             local e2 = chapter_11_6_5_proto11.experts
+            if type(e2) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
 end
@@ -321,14 +402,20 @@ local function test_chapter_11_6_6()
     recorder:tryPcall(
         "ProtoExpert.new(abbr,text,group,severity)",
         function()
-            ProtoExpert.new("abbr", "text", expert.group.DEBUG, expert.severity.NOTE)
+            local protoexpert = ProtoExpert.new("abbr", "text", expert.group.DEBUG, expert.severity.NOTE)
+            if type(protoexpert) ~= "userdata" then
+                error("not userdata", 0)
+            end
         end
     )
     recorder:tryPcall(
         "protoexpert:__tostring()",
         function()
             local e = ProtoExpert.new("abbr", "text", expert.group.DEBUG, expert.severity.NOTE)
-            tostring(e)
+            local s = tostring(e)
+            if type(s) ~= "string" then
+                error("not string", 0)
+            end
         end
     )
 end
@@ -337,7 +424,10 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.new(name,abbr,type)",
             function()
-                ProtoField.new("name", "abbr", ftypes.INT8)
+                local protofield = ProtoField.new("name", "abbr", ftypes.INT8)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -346,25 +436,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.new("name", "abbr", ftypes.BOOLEAN, valuestring)
+                local protofield = ProtoField.new("name", "abbr", ftypes.BOOLEAN, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.new(name,abbr,type,nil,base)",
             function()
-                ProtoField.new(
+                local protofield = ProtoField.new(
                     "name",
                     "abbr",
                     ftypes.INT8,
                     nil,
                     base.DEC
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.new(name,abbr,type,nil,nil,mask)",
             function()
-                ProtoField.new(
+                local protofield = ProtoField.new(
                     "name",
                     "abbr",
                     ftypes.INT8,
@@ -372,12 +468,15 @@ local function test_chapter_11_6_7()
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.new(name,abbr,type,nil,nil,nil,descr)",
             function()
-                ProtoField.new(
+                local protofield = ProtoField.new(
                     "name",
                     "abbr",
                     ftypes.INT8,
@@ -386,6 +485,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "descr"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -393,19 +495,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.char(abbr)",
             function()
-                ProtoField.char("abbr")
+                local protofield = ProtoField.char("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.char(abbr,name)",
             function()
-                ProtoField.char("abbr", "name")
+                local protofield = ProtoField.char("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.char(abbr,nil,base)",
             function()
-                ProtoField.char("abbr", nil, base.HEX)
+                local protofield = ProtoField.char("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -414,25 +525,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.char("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.char("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.char(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.char(
+                local protofield = ProtoField.char(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.char(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.char(
+                local protofield = ProtoField.char(
                     "abbr",
                     nil,
                     nil,
@@ -440,6 +557,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -447,19 +567,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.uint8(abbr)",
             function()
-                ProtoField.uint8("abbr")
+                local protofield = ProtoField.uint8("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint8(abbr,name)",
             function()
-                ProtoField.uint8("abbr", "name")
+                local protofield = ProtoField.uint8("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint8(abbr,nil,base)",
             function()
-                ProtoField.uint8("abbr", nil, base.HEX)
+                local protofield = ProtoField.uint8("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -468,25 +597,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.uint8("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.uint8("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint8(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.uint8(
+                local protofield = ProtoField.uint8(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint8(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.uint8(
+                local protofield = ProtoField.uint8(
                     "abbr",
                     nil,
                     nil,
@@ -494,6 +629,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -501,19 +639,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.uint16(abbr)",
             function()
-                ProtoField.uint16("abbr")
+                local protofield = ProtoField.uint16("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint16(abbr,name)",
             function()
-                ProtoField.uint16("abbr", "name")
+                local protofield = ProtoField.uint16("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint16(abbr,nil,base)",
             function()
-                ProtoField.uint16("abbr", nil, base.HEX)
+                local protofield = ProtoField.uint16("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -522,25 +669,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.uint16("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.uint16("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint16(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.uint16(
+                local protofield = ProtoField.uint16(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint16(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.uint16(
+                local protofield = ProtoField.uint16(
                     "abbr",
                     nil,
                     nil,
@@ -548,6 +701,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -555,19 +711,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.uint24(abbr)",
             function()
-                ProtoField.uint24("abbr")
+                local protofield = ProtoField.uint24("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint24(abbr,name)",
             function()
-                ProtoField.uint24("abbr", "name")
+                local protofield = ProtoField.uint24("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint24(abbr,nil,base)",
             function()
-                ProtoField.uint24("abbr", nil, base.HEX)
+                local protofield = ProtoField.uint24("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -576,25 +741,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.uint24("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.uint24("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint24(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.uint24(
+                local protofield = ProtoField.uint24(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint24(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.uint24(
+                local protofield = ProtoField.uint24(
                     "abbr",
                     nil,
                     nil,
@@ -602,6 +773,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -609,19 +783,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.uint32(abbr)",
             function()
-                ProtoField.uint32("abbr")
+                local protofield = ProtoField.uint32("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint32(abbr,name)",
             function()
-                ProtoField.uint32("abbr", "name")
+                local protofield = ProtoField.uint32("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint32(abbr,nil,base)",
             function()
-                ProtoField.uint32("abbr", nil, base.HEX)
+                local protofield = ProtoField.uint32("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -630,25 +813,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.uint32("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.uint32("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint32(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.uint32(
+                local protofield = ProtoField.uint32(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint32(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.uint32(
+                local protofield = ProtoField.uint32(
                     "abbr",
                     nil,
                     nil,
@@ -656,6 +845,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -663,19 +855,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.uint64(abbr)",
             function()
-                ProtoField.uint64("abbr")
+                local protofield = ProtoField.uint64("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint64(abbr,name)",
             function()
-                ProtoField.uint64("abbr", "name")
+                local protofield = ProtoField.uint64("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint64(abbr,nil,base)",
             function()
-                ProtoField.uint64("abbr", nil, base.HEX)
+                local protofield = ProtoField.uint64("abbr", nil, base.HEX)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -684,25 +885,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.uint64("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.uint64("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint64(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.uint64(
+                local protofield = ProtoField.uint64(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.uint64(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.uint64(
+                local protofield = ProtoField.uint64(
                     "abbr",
                     nil,
                     nil,
@@ -710,6 +917,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -717,19 +927,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.int8(abbr)",
             function()
-                ProtoField.int8("abbr")
+                local protofield = ProtoField.int8("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int8(abbr,name)",
             function()
-                ProtoField.int8("abbr", "name")
+                local protofield = ProtoField.int8("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int8(abbr,nil,base)",
             function()
-                ProtoField.int8("abbr", nil, base.DEC)
+                local protofield = ProtoField.int8("abbr", nil, base.DEC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -738,25 +957,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.int8("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.int8("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int8(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.int8(
+                local protofield = ProtoField.int8(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int8(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.int8(
+                local protofield = ProtoField.int8(
                     "abbr",
                     nil,
                     nil,
@@ -764,6 +989,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -771,19 +999,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.int16(abbr)",
             function()
-                ProtoField.int16("abbr")
+                local protofield = ProtoField.int16("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int16(abbr,name)",
             function()
-                ProtoField.int16("abbr", "name")
+                local protofield = ProtoField.int16("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int16(abbr,nil,base)",
             function()
-                ProtoField.int16("abbr", nil, base.DEC)
+                local protofield = ProtoField.int16("abbr", nil, base.DEC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -792,25 +1029,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.int16("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.int16("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int16(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.int16(
+                local protofield = ProtoField.int16(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int16(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.int16(
+                local protofield = ProtoField.int16(
                     "abbr",
                     nil,
                     nil,
@@ -818,6 +1061,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -825,19 +1071,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.int24(abbr)",
             function()
-                ProtoField.int24("abbr")
+                local protofield = ProtoField.int24("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int24(abbr,name)",
             function()
-                ProtoField.int24("abbr", "name")
+                local protofield = ProtoField.int24("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int24(abbr,nil,base)",
             function()
-                ProtoField.int24("abbr", nil, base.DEC)
+                local protofield = ProtoField.int24("abbr", nil, base.DEC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -846,25 +1101,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.int24("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.int24("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int24(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.int24(
+                local protofield = ProtoField.int24(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int24(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.int24(
+                local protofield = ProtoField.int24(
                     "abbr",
                     nil,
                     nil,
@@ -872,6 +1133,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -879,19 +1143,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.int32(abbr)",
             function()
-                ProtoField.int32("abbr")
+                local protofield = ProtoField.int32("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int32(abbr,name)",
             function()
-                ProtoField.int32("abbr", "name")
+                local protofield = ProtoField.int32("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int32(abbr,nil,base)",
             function()
-                ProtoField.int32("abbr", nil, base.DEC)
+                local protofield = ProtoField.int32("abbr", nil, base.DEC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -900,25 +1173,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.int32("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.int32("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int32(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.int32(
+                local protofield = ProtoField.int32(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int32(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.int32(
+                local protofield = ProtoField.int32(
                     "abbr",
                     nil,
                     nil,
@@ -926,6 +1205,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -933,19 +1215,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.int64(abbr)",
             function()
-                ProtoField.int64("abbr")
+                local protofield = ProtoField.int64("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int64(abbr,name)",
             function()
-                ProtoField.int64("abbr", "name")
+                local protofield = ProtoField.int64("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int64(abbr,nil,base)",
             function()
-                ProtoField.int64("abbr", nil, base.DEC)
+                local protofield = ProtoField.int64("abbr", nil, base.DEC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -954,25 +1245,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.int64("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.int64("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int64(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.int64(
+                local protofield = ProtoField.int64(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     255
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.int64(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.int64(
+                local protofield = ProtoField.int64(
                     "abbr",
                     nil,
                     nil,
@@ -980,6 +1277,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -987,43 +1287,58 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.framenum(abbr)",
             function()
-                ProtoField.framenum("abbr")
+                local protofield = ProtoField.framenum("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.framenum(abbr,name)",
             function()
-                ProtoField.framenum("abbr", "name")
+                local protofield = ProtoField.framenum("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.framenum(abbr,nil,base)",
             function()
-                ProtoField.framenum("abbr", nil, base.NONE)
+                local protofield = ProtoField.framenum("abbr", nil, base.NONE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.framenum(abbr,nil,nil,frametype)",
             function()
-                ProtoField.framenum("abbr", nil, nil, frametype.NONE)
+                local protofield = ProtoField.framenum("abbr", nil, nil, frametype.NONE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.framenum(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.framenum(
+                local protofield = ProtoField.framenum(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     0
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.framenum(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.framenum(
+                local protofield = ProtoField.framenum(
                     "abbr",
                     nil,
                     nil,
@@ -1031,6 +1346,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1038,19 +1356,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.bool(abbr)",
             function()
-                ProtoField.bool("abbr")
+                local protofield = ProtoField.bool("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bool(abbr,name)",
             function()
-                ProtoField.bool("abbr", "name")
+                local protofield = ProtoField.bool("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bool(abbr,nil,display)",
             function()
-                ProtoField.bool("abbr", nil, base.NONE)
+                local protofield = ProtoField.bool("abbr", nil, base.NONE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -1059,25 +1386,31 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.bool("abbr", nil, nil, valuestring)
+                local protofield = ProtoField.bool("abbr", nil, nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bool(abbr,nil,nil,nil,mask)",
             function()
-                ProtoField.bool(
+                local protofield = ProtoField.bool(
                     "abbr",
                     nil,
                     nil,
                     nil,
                     0
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bool(abbr,nil,nil,nil,nil,desc)",
             function()
-                ProtoField.bool(
+                local protofield = ProtoField.bool(
                     "abbr",
                     nil,
                     nil,
@@ -1085,6 +1418,9 @@ local function test_chapter_11_6_7()
                     nil,
                     "desc"
                 )
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1092,25 +1428,37 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.absolute_time(abbr)",
             function()
-                ProtoField.absolute_time("abbr")
+                local protofield = ProtoField.absolute_time("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.absolute_time(abbr,name)",
             function()
-                ProtoField.absolute_time("abbr", "name")
+                local protofield = ProtoField.absolute_time("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.absolute_time(abbr,nil,base)",
             function()
-                ProtoField.absolute_time("abbr", nil, base.UTC)
+                local protofield = ProtoField.absolute_time("abbr", nil, base.UTC)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.absolute_time(abbr,nil,nil,desc)",
             function()
-                ProtoField.absolute_time("abbr", nil, nil, "desc")
+                local protofield = ProtoField.absolute_time("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1118,19 +1466,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.relative_time(abbr)",
             function()
-                ProtoField.relative_time("abbr")
+                local protofield = ProtoField.relative_time("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.relative_time(abbr,name)",
             function()
-                ProtoField.relative_time("abbr", "name")
+                local protofield = ProtoField.relative_time("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.relative_time(abbr,nil,desc)",
             function()
-                ProtoField.relative_time("abbr", nil, "desc")
+                local protofield = ProtoField.relative_time("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1138,13 +1495,19 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.float(abbr)",
             function()
-                ProtoField.float("abbr")
+                local protofield = ProtoField.float("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.float(abbr,name)",
             function()
-                ProtoField.float("abbr", "name")
+                local protofield = ProtoField.float("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -1153,13 +1516,19 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.float("abbr", nil, valuestring)
+                local protofield = ProtoField.float("abbr", nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.float(abbr,nil,nil,desc)",
             function()
-                ProtoField.float("abbr", nil, nil, "desc")
+                local protofield = ProtoField.float("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1167,13 +1536,19 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.double(abbr)",
             function()
-                ProtoField.double("abbr")
+                local protofield = ProtoField.double("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.double(abbr,name)",
             function()
-                ProtoField.double("abbr", "name")
+                local protofield = ProtoField.double("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
@@ -1182,13 +1557,19 @@ local function test_chapter_11_6_7()
                 local valuestring = {}
                 valuestring[1] = "a"
                 valuestring[2] = "b"
-                ProtoField.double("abbr", nil, valuestring)
+                local protofield = ProtoField.double("abbr", nil, valuestring)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.double(abbr,nil,nil,desc)",
             function()
-                ProtoField.double("abbr", nil, nil, "desc")
+                local protofield = ProtoField.double("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1196,25 +1577,37 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.string(abbr)",
             function()
-                ProtoField.string("abbr")
+                local protofield = ProtoField.string("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.string(abbr,name)",
             function()
-                ProtoField.string("abbr", "name")
+                local protofield = ProtoField.string("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.string(abbr,nil,display)",
             function()
-                ProtoField.string("abbr", nil, base.UNICODE)
+                local protofield = ProtoField.string("abbr", nil, base.UNICODE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.string(abbr,nil,nil,desc)",
             function()
-                ProtoField.string("abbr", nil, nil, "desc")
+                local protofield = ProtoField.string("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1222,25 +1615,37 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.stringz(abbr)",
             function()
-                ProtoField.stringz("abbr")
+                local protofield = ProtoField.stringz("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.stringz(abbr,name)",
             function()
-                ProtoField.stringz("abbr", "name")
+                local protofield = ProtoField.stringz("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.stringz(abbr,nil,display)",
             function()
-                ProtoField.stringz("abbr", nil, base.UNICODE)
+                local protofield = ProtoField.stringz("abbr", nil, base.UNICODE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.stringz(abbr,nil,nil,desc)",
             function()
-                ProtoField.stringz("abbr", nil, nil, "desc")
+                local protofield = ProtoField.stringz("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1248,25 +1653,37 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.bytes(abbr)",
             function()
-                ProtoField.bytes("abbr")
+                local protofield = ProtoField.bytes("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bytes(abbr,name)",
             function()
-                ProtoField.bytes("abbr", "name")
+                local protofield = ProtoField.bytes("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bytes(abbr,nil,display)",
             function()
-                ProtoField.bytes("abbr", nil, base.SPACE)
+                local protofield = ProtoField.bytes("abbr", nil, base.SPACE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.bytes(abbr,nil,nil,desc)",
             function()
-                ProtoField.bytes("abbr", nil, nil, "desc")
+                local protofield = ProtoField.bytes("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1274,25 +1691,37 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.ubytes(abbr)",
             function()
-                ProtoField.ubytes("abbr")
+                local protofield = ProtoField.ubytes("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ubytes(abbr,name)",
             function()
-                ProtoField.ubytes("abbr", "name")
+                local protofield = ProtoField.ubytes("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ubytes(abbr,nil,display)",
             function()
-                ProtoField.ubytes("abbr", nil, base.SPACE)
+                local protofield = ProtoField.ubytes("abbr", nil, base.SPACE)
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ubytes(abbr,nil,nil,desc)",
             function()
-                ProtoField.ubytes("abbr", nil, nil, "desc")
+                local protofield = ProtoField.ubytes("abbr", nil, nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1300,19 +1729,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.none(abbr)",
             function()
-                ProtoField.none("abbr")
+                local protofield = ProtoField.none("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.none(abbr,name)",
             function()
-                ProtoField.none("abbr", "name")
+                local protofield = ProtoField.none("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.none(abbr,nil,desc)",
             function()
-                ProtoField.none("abbr", nil, "desc")
+                local protofield = ProtoField.none("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1320,19 +1758,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.ipv4(abbr)",
             function()
-                ProtoField.ipv4("abbr")
+                local protofield = ProtoField.ipv4("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ipv4(abbr,name)",
             function()
-                ProtoField.ipv4("abbr", "name")
+                local protofield = ProtoField.ipv4("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ipv4(abbr,nil,desc)",
             function()
-                ProtoField.ipv4("abbr", nil, "desc")
+                local protofield = ProtoField.ipv4("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1340,19 +1787,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.ipv6(abbr)",
             function()
-                ProtoField.ipv6("abbr")
+                local protofield = ProtoField.ipv6("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ipv6(abbr,name)",
             function()
-                ProtoField.ipv6("abbr", "name")
+                local protofield = ProtoField.ipv6("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ipv6(abbr,nil,desc)",
             function()
-                ProtoField.ipv6("abbr", nil, "desc")
+                local protofield = ProtoField.ipv6("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1360,19 +1816,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.ether(abbr)",
             function()
-                ProtoField.ether("abbr")
+                local protofield = ProtoField.ether("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ether(abbr,name)",
             function()
-                ProtoField.ether("abbr", "name")
+                local protofield = ProtoField.ether("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.ether(abbr,nil,desc)",
             function()
-                ProtoField.ether("abbr", nil, "desc")
+                local protofield = ProtoField.ether("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1380,19 +1845,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.guid(abbr)",
             function()
-                ProtoField.guid("abbr")
+                local protofield = ProtoField.guid("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.guid(abbr,name)",
             function()
-                ProtoField.guid("abbr", "name")
+                local protofield = ProtoField.guid("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.guid(abbr,nil,desc)",
             function()
-                ProtoField.guid("abbr", nil, "desc")
+                local protofield = ProtoField.guid("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1400,19 +1874,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.oid(abbr)",
             function()
-                ProtoField.oid("abbr")
+                local protofield = ProtoField.oid("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.oid(abbr,name)",
             function()
-                ProtoField.oid("abbr", "name")
+                local protofield = ProtoField.oid("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.oid(abbr,nil,desc)",
             function()
-                ProtoField.oid("abbr", nil, "desc")
+                local protofield = ProtoField.oid("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1420,19 +1903,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.protocol(abbr)",
             function()
-                ProtoField.protocol("abbr")
+                local protofield = ProtoField.protocol("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.protocol(abbr,name)",
             function()
-                ProtoField.protocol("abbr", "name")
+                local protofield = ProtoField.protocol("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.protocol(abbr,nil,desc)",
             function()
-                ProtoField.protocol("abbr", nil, "desc")
+                local protofield = ProtoField.protocol("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1440,19 +1932,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.rel_oid(abbr)",
             function()
-                ProtoField.rel_oid("abbr")
+                local protofield = ProtoField.rel_oid("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.rel_oid(abbr,name)",
             function()
-                ProtoField.rel_oid("abbr", "name")
+                local protofield = ProtoField.rel_oid("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.rel_oid(abbr,nil,desc)",
             function()
-                ProtoField.rel_oid("abbr", nil, "desc")
+                local protofield = ProtoField.rel_oid("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1460,19 +1961,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.systemid(abbr)",
             function()
-                ProtoField.systemid("abbr")
+                local protofield = ProtoField.systemid("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.systemid(abbr,name)",
             function()
-                ProtoField.systemid("abbr", "name")
+                local protofield = ProtoField.systemid("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.systemid(abbr,nil,desc)",
             function()
-                ProtoField.systemid("abbr", nil, "desc")
+                local protofield = ProtoField.systemid("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1480,19 +1990,28 @@ local function test_chapter_11_6_7()
         recorder:tryPcall(
             "ProtoField.eui64(abbr)",
             function()
-                ProtoField.eui64("abbr")
+                local protofield = ProtoField.eui64("abbr")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.eui64(abbr,name)",
             function()
-                ProtoField.eui64("abbr", "name")
+                local protofield = ProtoField.eui64("abbr", "name")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
         recorder:tryPcall(
             "ProtoField.eui64(abbr,nil,desc)",
             function()
-                ProtoField.eui64("abbr", nil, "desc")
+                local protofield = ProtoField.eui64("abbr", nil, "desc")
+                if type(protofield) ~= "userdata" then
+                    error("not userdata", 0)
+                end
             end
         )
     end
@@ -1501,7 +2020,10 @@ local function test_chapter_11_6_7()
             "ProtoField.eui64(abbr)",
             function()
                 local protofield = ProtoField.none("abbr")
-                tostring(protofield)
+                local s = tostring(protofield)
+                if type(s) ~= "string" then
+                    error("not string", 0)
+                end
             end
         )
     end
@@ -1540,14 +2062,20 @@ local function test_chapter_11_6_1_dissector(buffer, pinfo, tree)
         "dissector:call(tvb, pinfo, tree)",
         function()
             local dissector = Dissector.get("http")
-            dissector:call(buffer, pinfo, tree)
+            local result = dissector:call(buffer, pinfo, tree)
+            if type(result) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
     recorder:tryPcall(
         "dissector:__call(tvb, pinfo, tree)",
         function()
             local dissector = Dissector.get("http")
-            dissector(buffer, pinfo, tree)
+            local result = dissector(buffer, pinfo, tree)
+            if type(result) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
 end
@@ -1562,9 +2090,15 @@ local function test_chapter_11_6_2_dissector(buffer, pinfo, tree)
         "dissectortable:try(pattern,tvb,pinfo,tree)",
         function()
             local dissectortable01 = DissectorTable.new("tablename_dissector01", nil, ftypes.UINT8)
-            dissectortable01:try(1, buffer, pinfo, tree)
+            local result01 = dissectortable01:try(1, buffer, pinfo, tree)
+            if type(result01) ~= "number" then
+                error("not number", 0)
+            end
             local dissectortable02 = DissectorTable.new("tablename_dissector02", nil, ftypes.STRING)
-            dissectortable02:try("1", buffer, pinfo, tree)
+            local result02 = dissectortable02:try("1", buffer, pinfo, tree)
+            if type(result02) ~= "number" then
+                error("not number", 0)
+            end
         end
     )
 end

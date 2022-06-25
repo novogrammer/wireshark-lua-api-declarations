@@ -7,44 +7,77 @@ function test_chapter_11_6_1(this: void) {
 
   recorder.tryPcall("Dissector.get(name)", () => {
     const dissector=Dissector.get("http");
+    if(type(dissector)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Dissector.list()", () => {
     const list=Dissector.list();
+    if(type(list)!="table"){
+      throw "not table";
+    }
   });
   recorder.tryPcall("dissector:__tostring()", () => {
     const dissector=Dissector.get("http");
-    tostring(dissector);
+    const s=tostring(dissector);
+    if(type(s)!="string"){
+      throw "not string";
+    }
   });
 
 }
 function test_chapter_11_6_2(this: void) {
 
   recorder.tryPcall("DissectorTable.new(tablename)", () => {
-    DissectorTable.new("tablename01");
+    const dissectortable=DissectorTable.new("tablename01");
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("DissectorTable.new(tablename,uiname)", () => {
-    DissectorTable.new("tablename02","bar");
+    const dissectortable=DissectorTable.new("tablename02","bar");
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("DissectorTable.new(tablename,nil,type)", () => {
-    DissectorTable.new("tablename03",undefined,ftypes.UINT8);
+    const dissectortable=DissectorTable.new("tablename03",undefined,ftypes.UINT8);
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("DissectorTable.new(tablename,nil,nil,base)", () => {
-    DissectorTable.new("tablename04",undefined,undefined,base.NONE);
+    const dissectortable=DissectorTable.new("tablename04",undefined,undefined,base.NONE);
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("DissectorTable.new(tablename,nil,nil,nil,proto)", () => {
     const chapter_11_6_2_proto01 = Proto.new("chapter_11_6_2_proto01", "chapter_11_6_2_proto01");
-    DissectorTable.new("tablename05",undefined,undefined,undefined,chapter_11_6_2_proto01);
+    const dissectortable=DissectorTable.new("tablename05",undefined,undefined,undefined,chapter_11_6_2_proto01);
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
 
   recorder.tryPcall("DissectorTable.list()", () => {
-    DissectorTable.list();
+    const list=DissectorTable.list();
+    if(type(list)!="table"){
+      throw "not table";
+    }
   });
   recorder.tryPcall("DissectorTable.heuristic_list()", () => {
-    DissectorTable.heuristic_list();
+    const list=DissectorTable.heuristic_list();
+    if(type(list)!="table"){
+      throw "not table";
+    }
   });
   recorder.tryPcall("DissectorTable.get(tablename)", () => {
     // tablename01 is created before
-    DissectorTable.get("tablename01");
+    const dissectortable=DissectorTable.get("tablename01");
+    if(type(dissectortable)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("dissectortable:add(pattern,dissector)", () => {
     const dissector=Dissector.get("http");
@@ -89,7 +122,10 @@ function test_chapter_11_6_2(this: void) {
     }
     dissectortable.remove_all(dissector);
     dissectortable.add(1,dissector);
-    dissectortable.get_dissector(1);
+    const result=dissectortable.get_dissector(1);
+    if(type(result)!="userdata"){
+      throw "not userdata";
+    }
 
   });
   recorder.tryPcall("dissectortable:add_for_decode_as(proto)", () => {
@@ -105,20 +141,32 @@ function test_chapter_11_6_2(this: void) {
     if(dissectortable==null){
       throw "dissectortable is null";
     }
-    tostring(dissectortable);
+    const s=tostring(dissectortable);
+    if(type(s)!="string"){
+      throw "not string";
+    }
   });
 
 }
 function test_chapter_11_6_3(this: void) {
   
   recorder.tryPcall("Pref.bool(label,default,descr)", () => {
-    Pref.bool("label",true,"descr");
+    const pref=Pref.bool("label",true,"descr");
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Pref.uint(label,default,descr)", () => {
-    Pref.uint("label",1,"descr");
+    const pref=Pref.uint("label",1,"descr");
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Pref.string(label,default,descr)", () => {
-    Pref.string("label","a","descr");
+    const pref=Pref.string("label","a","descr");
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
 
   recorder.tryPcall("Pref.enum(label,default,descr)", () => {
@@ -128,13 +176,22 @@ function test_chapter_11_6_3(this: void) {
       [0,"A",A],
       [1,"B",B],
     ];
-    Pref.enum("label",A,"descr",myEnum,true);
+    const pref=Pref.enum("label",A,"descr",myEnum,true);
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Pref.range(label,default,descr,max)", () => {
-    Pref.range("label","1-2","descr",2);
+    const pref=Pref.range("label","1-2","descr",2);
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("Pref.statictext(label,descr)", () => {
-    Pref.statictext("label","descr");
+    const pref=Pref.statictext("label","descr");
+    if(type(pref)!="userdata"){
+      throw "not userdata";
+    }
   });
 
 }
@@ -151,17 +208,26 @@ function test_chapter_11_6_4(this: void) {
     const prefs=chapter_11_6_4_proto02.prefs;
     const pref=Pref.bool("label",true,"descr");
     prefs.set("a",pref);
-    prefs.get("a");
+    const result=prefs.get("a");
+    if(type(result)!="userdata"){
+      throw "not userdata";
+    }
   });
 }
 function test_chapter_11_6_5(this: void) {
 
   recorder.tryPcall("Proto.new(name,desc)", () => {
     const chapter_11_6_5_proto01 = Proto.new("chapter_11_6_5_proto01", "chapter_11_6_5_proto01");
+    if(type(chapter_11_6_5_proto01)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("proto:__call(name,desc)", () => {
     const chapter_11_6_5_proto02 = Proto.new("chapter_11_6_5_proto02", "chapter_11_6_5_proto02");
     const chapter_11_6_5_proto03=chapter_11_6_5_proto02("chapter_11_6_5_proto03","chapter_11_6_5_proto03");
+    if(type(chapter_11_6_5_proto03)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("proto:register_heuristic(listname,func)", () => {
     const chapter_11_6_5_proto04 = Proto.new("chapter_11_6_5_proto04", "chapter_11_6_5_proto04");
@@ -178,6 +244,9 @@ function test_chapter_11_6_5(this: void) {
     }
     chapter_11_6_5_proto05.dissector=d;
     const d2=chapter_11_6_5_proto05.dissector;
+    if(type(d2)!="userdata"){
+      throw "not userdata";
+    }
   });
   recorder.tryPcall("proto.prefs_changed", () => {
     const chapter_11_6_5_proto06 = Proto.new("chapter_11_6_5_proto06", "chapter_11_6_5_proto06");
@@ -192,10 +261,16 @@ function test_chapter_11_6_5(this: void) {
   recorder.tryPcall("proto.name", () => {
     const chapter_11_6_5_proto08 = Proto.new("chapter_11_6_5_proto08", "chapter_11_6_5_proto08");
     const name=chapter_11_6_5_proto08["name"];
+    if(type(name)!="string"){
+      throw "not string";
+    }
   });
   recorder.tryPcall("proto.description", () => {
     const chapter_11_6_5_proto09 = Proto.new("chapter_11_6_5_proto09", "chapter_11_6_5_proto09");
     const description=chapter_11_6_5_proto09.description;
+    if(type(description)!="string"){
+      throw "not string";
+    }
   });
   recorder.tryPcall("proto.fields", () => {
     const chapter_11_6_5_proto10 = Proto.new("chapter_11_6_5_proto10", "chapter_11_6_5_proto10");
@@ -203,6 +278,9 @@ function test_chapter_11_6_5(this: void) {
     fields.set(1,ProtoField.int8("abbr"));
     chapter_11_6_5_proto10.fields=fields;
     const fields2=chapter_11_6_5_proto10.fields;
+    if(type(fields2)!="table"){
+      throw "not table";
+    }
   });
   recorder.tryPcall("proto.experts", () => {
     const chapter_11_6_5_proto11 = Proto.new("chapter_11_6_5_proto11", "chapter_11_6_5_proto11");
@@ -210,17 +288,26 @@ function test_chapter_11_6_5(this: void) {
     e.set(1,ProtoExpert.new("abbr","text",expert.group.DEBUG,expert.severity.NOTE));
     chapter_11_6_5_proto11.experts=e;
     const e2=chapter_11_6_5_proto11.experts;
+    if(type(e2)!="userdata"){
+      throw "not userdata";
+    }
 
   });
 }
 function test_chapter_11_6_6(this: void) {
   recorder.tryPcall("ProtoExpert.new(abbr,text,group,severity)", () => {
-    ProtoExpert.new("abbr","text",expert.group.DEBUG,expert.severity.NOTE);
+    const protoexpert=ProtoExpert.new("abbr","text",expert.group.DEBUG,expert.severity.NOTE);
+    if(type(protoexpert)!="userdata"){
+      throw "not userdata";
+    }
   });
 
   recorder.tryPcall("protoexpert:__tostring()", () => {
     const e=ProtoExpert.new("abbr","text",expert.group.DEBUG,expert.severity.NOTE);
-    tostring(e);
+    const s=tostring(e);
+    if(type(s)!="string"){
+      throw "not string";
+    }
   });
 
 }
@@ -228,550 +315,985 @@ function test_chapter_11_6_6(this: void) {
 function test_chapter_11_6_7(this: void) {
   {
     recorder.tryPcall("ProtoField.new(name,abbr,type)", () => {
-      ProtoField.new("name","abbr",ftypes.INT8);
+      const protofield=ProtoField.new("name","abbr",ftypes.INT8);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.new(name,abbr,type,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.new("name","abbr",ftypes.BOOLEAN,valuestring);
+      const protofield=ProtoField.new("name","abbr",ftypes.BOOLEAN,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.new(name,abbr,type,nil,base)", () => {
-      ProtoField.new("name","abbr",ftypes.INT8,undefined,base.DEC);
+      const protofield=ProtoField.new("name","abbr",ftypes.INT8,undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.new(name,abbr,type,nil,nil,mask)", () => {
-      ProtoField.new("name","abbr",ftypes.INT8,undefined,undefined,0xff);
+      const protofield=ProtoField.new("name","abbr",ftypes.INT8,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.new(name,abbr,type,nil,nil,nil,descr)", () => {
-      ProtoField.new("name","abbr",ftypes.INT8,undefined,undefined,undefined,"descr");
+      const protofield=ProtoField.new("name","abbr",ftypes.INT8,undefined,undefined,undefined,"descr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.char(abbr)", () => {
-      ProtoField.char("abbr");
+      const protofield=ProtoField.char("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.char(abbr,name)", () => {
-      ProtoField.char("abbr","name");
+      const protofield=ProtoField.char("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.char(abbr,nil,base)", () => {
-      ProtoField.char("abbr",undefined,base.HEX);
+      const protofield=ProtoField.char("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.char(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.char("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.char("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.char(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.char("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.char("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.char(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.char("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.char("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.uint8(abbr)", () => {
-      ProtoField.uint8("abbr");
+      const protofield=ProtoField.uint8("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint8(abbr,name)", () => {
-      ProtoField.uint8("abbr","name");
+      const protofield=ProtoField.uint8("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint8(abbr,nil,base)", () => {
-      ProtoField.uint8("abbr",undefined,base.HEX);
+      const protofield=ProtoField.uint8("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint8(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.uint8("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.uint8("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint8(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.uint8("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.uint8("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint8(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.uint8("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.uint8("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.uint16(abbr)", () => {
-      ProtoField.uint16("abbr");
+      const protofield=ProtoField.uint16("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint16(abbr,name)", () => {
-      ProtoField.uint16("abbr","name");
+      const protofield=ProtoField.uint16("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint16(abbr,nil,base)", () => {
-      ProtoField.uint16("abbr",undefined,base.HEX);
+      const protofield=ProtoField.uint16("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint16(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.uint16("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.uint16("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint16(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.uint16("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.uint16("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint16(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.uint16("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.uint16("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.uint24(abbr)", () => {
-      ProtoField.uint24("abbr");
+      const protofield=ProtoField.uint24("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint24(abbr,name)", () => {
-      ProtoField.uint24("abbr","name");
+      const protofield=ProtoField.uint24("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint24(abbr,nil,base)", () => {
-      ProtoField.uint24("abbr",undefined,base.HEX);
+      const protofield=ProtoField.uint24("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint24(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.uint24("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.uint24("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint24(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.uint24("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.uint24("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint24(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.uint24("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.uint24("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.uint32(abbr)", () => {
-      ProtoField.uint32("abbr");
+      const protofield=ProtoField.uint32("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint32(abbr,name)", () => {
-      ProtoField.uint32("abbr","name");
+      const protofield=ProtoField.uint32("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint32(abbr,nil,base)", () => {
-      ProtoField.uint32("abbr",undefined,base.HEX);
+      const protofield=ProtoField.uint32("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint32(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.uint32("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.uint32("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint32(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.uint32("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.uint32("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint32(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.uint32("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.uint32("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.uint64(abbr)", () => {
-      ProtoField.uint64("abbr");
+      const protofield=ProtoField.uint64("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint64(abbr,name)", () => {
-      ProtoField.uint64("abbr","name");
+      const protofield=ProtoField.uint64("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint64(abbr,nil,base)", () => {
-      ProtoField.uint64("abbr",undefined,base.HEX);
+      const protofield=ProtoField.uint64("abbr",undefined,base.HEX);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint64(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.uint64("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.uint64("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint64(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.uint64("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.uint64("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.uint64(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.uint64("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.uint64("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.int8(abbr)", () => {
-      ProtoField.int8("abbr");
+      const protofield=ProtoField.int8("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int8(abbr,name)", () => {
-      ProtoField.int8("abbr","name");
+      const protofield=ProtoField.int8("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int8(abbr,nil,base)", () => {
-      ProtoField.int8("abbr",undefined,base.DEC);
+      const protofield=ProtoField.int8("abbr",undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int8(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.int8("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.int8("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int8(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.int8("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.int8("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int8(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.int8("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.int8("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.int16(abbr)", () => {
-      ProtoField.int16("abbr");
+      const protofield=ProtoField.int16("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int16(abbr,name)", () => {
-      ProtoField.int16("abbr","name");
+      const protofield=ProtoField.int16("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int16(abbr,nil,base)", () => {
-      ProtoField.int16("abbr",undefined,base.DEC);
+      const protofield=ProtoField.int16("abbr",undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int16(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.int16("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.int16("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int16(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.int16("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.int16("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int16(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.int16("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.int16("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.int24(abbr)", () => {
-      ProtoField.int24("abbr");
+      const protofield=ProtoField.int24("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int24(abbr,name)", () => {
-      ProtoField.int24("abbr","name");
+      const protofield=ProtoField.int24("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int24(abbr,nil,base)", () => {
-      ProtoField.int24("abbr",undefined,base.DEC);
+      const protofield=ProtoField.int24("abbr",undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int24(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.int24("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.int24("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int24(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.int24("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.int24("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int24(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.int24("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.int24("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.int32(abbr)", () => {
-      ProtoField.int32("abbr");
+      const protofield=ProtoField.int32("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int32(abbr,name)", () => {
-      ProtoField.int32("abbr","name");
+      const protofield=ProtoField.int32("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int32(abbr,nil,base)", () => {
-      ProtoField.int32("abbr",undefined,base.DEC);
+      const protofield=ProtoField.int32("abbr",undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int32(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.int32("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.int32("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int32(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.int32("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.int32("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int32(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.int32("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.int32("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.int64(abbr)", () => {
-      ProtoField.int64("abbr");
+      const protofield=ProtoField.int64("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int64(abbr,name)", () => {
-      ProtoField.int64("abbr","name");
+      const protofield=ProtoField.int64("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int64(abbr,nil,base)", () => {
-      ProtoField.int64("abbr",undefined,base.DEC);
+      const protofield=ProtoField.int64("abbr",undefined,base.DEC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int64(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.int64("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.int64("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int64(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.int64("abbr",undefined,undefined,undefined,0xff);
+      const protofield=ProtoField.int64("abbr",undefined,undefined,undefined,0xff);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.int64(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.int64("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.int64("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.framenum(abbr)", () => {
-      ProtoField.framenum("abbr");
+      const protofield=ProtoField.framenum("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.framenum(abbr,name)", () => {
-      ProtoField.framenum("abbr","name");
+      const protofield=ProtoField.framenum("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.framenum(abbr,nil,base)", () => {
-      ProtoField.framenum("abbr",undefined,base.NONE);
+      const protofield=ProtoField.framenum("abbr",undefined,base.NONE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.framenum(abbr,nil,nil,frametype)", () => {
-      ProtoField.framenum("abbr",undefined,undefined,frametype.NONE);
+      const protofield=ProtoField.framenum("abbr",undefined,undefined,frametype.NONE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.framenum(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.framenum("abbr",undefined,undefined,undefined,0);
+      const protofield=ProtoField.framenum("abbr",undefined,undefined,undefined,0);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.framenum(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.framenum("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.framenum("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.bool(abbr)", () => {
-      ProtoField.bool("abbr");
+      const protofield=ProtoField.bool("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bool(abbr,name)", () => {
-      ProtoField.bool("abbr","name");
+      const protofield=ProtoField.bool("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bool(abbr,nil,display)", () => {
-      ProtoField.bool("abbr",undefined,base.NONE);
+      const protofield=ProtoField.bool("abbr",undefined,base.NONE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bool(abbr,nil,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.bool("abbr",undefined,undefined,valuestring);
+      const protofield=ProtoField.bool("abbr",undefined,undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bool(abbr,nil,nil,nil,mask)", () => {
-      ProtoField.bool("abbr",undefined,undefined,undefined,0);
+      const protofield=ProtoField.bool("abbr",undefined,undefined,undefined,0);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bool(abbr,nil,nil,nil,nil,desc)", () => {
-      ProtoField.bool("abbr",undefined,undefined,undefined,undefined,"desc");
+      const protofield=ProtoField.bool("abbr",undefined,undefined,undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.absolute_time(abbr)", () => {
-      ProtoField.absolute_time("abbr");
+      const protofield=ProtoField.absolute_time("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.absolute_time(abbr,name)", () => {
-      ProtoField.absolute_time("abbr","name");
+      const protofield=ProtoField.absolute_time("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.absolute_time(abbr,nil,base)", () => {
-      ProtoField.absolute_time("abbr",undefined,base.UTC);
+      const protofield=ProtoField.absolute_time("abbr",undefined,base.UTC);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.absolute_time(abbr,nil,nil,desc)", () => {
-      ProtoField.absolute_time("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.absolute_time("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
 
   }
   {
     recorder.tryPcall("ProtoField.relative_time(abbr)", () => {
-      ProtoField.relative_time("abbr");
+      const protofield=ProtoField.relative_time("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.relative_time(abbr,name)", () => {
-      ProtoField.relative_time("abbr","name");
+      const protofield=ProtoField.relative_time("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.relative_time(abbr,nil,desc)", () => {
-      ProtoField.relative_time("abbr",undefined,"desc");
+      const protofield=ProtoField.relative_time("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.float(abbr)", () => {
-      ProtoField.float("abbr");
+      const protofield=ProtoField.float("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.float(abbr,name)", () => {
-      ProtoField.float("abbr","name");
+      const protofield=ProtoField.float("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.float(abbr,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.float("abbr",undefined,valuestring);
+      const protofield=ProtoField.float("abbr",undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.float(abbr,nil,nil,desc)", () => {
-      ProtoField.float("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.float("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.double(abbr)", () => {
-      ProtoField.double("abbr");
+      const protofield=ProtoField.double("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.double(abbr,name)", () => {
-      ProtoField.double("abbr","name");
+      const protofield=ProtoField.double("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.double(abbr,nil,valuestring)", () => {
       const valuestring=new LuaTable<number,any>();
       valuestring.set(1,"a");
       valuestring.set(2,"b");
-      ProtoField.double("abbr",undefined,valuestring);
+      const protofield=ProtoField.double("abbr",undefined,valuestring);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.double(abbr,nil,nil,desc)", () => {
-      ProtoField.double("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.double("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.string(abbr)", () => {
-      ProtoField.string("abbr");
+      const protofield=ProtoField.string("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.string(abbr,name)", () => {
-      ProtoField.string("abbr","name");
+      const protofield=ProtoField.string("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.string(abbr,nil,display)", () => {
-      ProtoField.string("abbr",undefined,base.UNICODE);
+      const protofield=ProtoField.string("abbr",undefined,base.UNICODE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.string(abbr,nil,nil,desc)", () => {
-      ProtoField.string("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.string("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.stringz(abbr)", () => {
-      ProtoField.stringz("abbr");
+      const protofield=ProtoField.stringz("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.stringz(abbr,name)", () => {
-      ProtoField.stringz("abbr","name");
+      const protofield=ProtoField.stringz("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.stringz(abbr,nil,display)", () => {
-      ProtoField.stringz("abbr",undefined,base.UNICODE);
+      const protofield=ProtoField.stringz("abbr",undefined,base.UNICODE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.stringz(abbr,nil,nil,desc)", () => {
-      ProtoField.stringz("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.stringz("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.bytes(abbr)", () => {
-      ProtoField.bytes("abbr");
+      const protofield=ProtoField.bytes("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bytes(abbr,name)", () => {
-      ProtoField.bytes("abbr","name");
+      const protofield=ProtoField.bytes("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bytes(abbr,nil,display)", () => {
-      ProtoField.bytes("abbr",undefined,base.SPACE);
+      const protofield=ProtoField.bytes("abbr",undefined,base.SPACE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.bytes(abbr,nil,nil,desc)", () => {
-      ProtoField.bytes("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.bytes("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.ubytes(abbr)", () => {
-      ProtoField.ubytes("abbr");
+      const protofield=ProtoField.ubytes("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ubytes(abbr,name)", () => {
-      ProtoField.ubytes("abbr","name");
+      const protofield=ProtoField.ubytes("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ubytes(abbr,nil,display)", () => {
-      ProtoField.ubytes("abbr",undefined,base.SPACE);
+      const protofield=ProtoField.ubytes("abbr",undefined,base.SPACE);
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ubytes(abbr,nil,nil,desc)", () => {
-      ProtoField.ubytes("abbr",undefined,undefined,"desc");
+      const protofield=ProtoField.ubytes("abbr",undefined,undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.none(abbr)", () => {
-      ProtoField.none("abbr");
+      const protofield=ProtoField.none("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.none(abbr,name)", () => {
-      ProtoField.none("abbr","name");
+      const protofield=ProtoField.none("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.none(abbr,nil,desc)", () => {
-      ProtoField.none("abbr",undefined,"desc");
+      const protofield=ProtoField.none("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.ipv4(abbr)", () => {
-      ProtoField.ipv4("abbr");
+      const protofield=ProtoField.ipv4("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ipv4(abbr,name)", () => {
-      ProtoField.ipv4("abbr","name");
+      const protofield=ProtoField.ipv4("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ipv4(abbr,nil,desc)", () => {
-      ProtoField.ipv4("abbr",undefined,"desc");
+      const protofield=ProtoField.ipv4("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.ipv6(abbr)", () => {
-      ProtoField.ipv6("abbr");
+      const protofield=ProtoField.ipv6("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ipv6(abbr,name)", () => {
-      ProtoField.ipv6("abbr","name");
+      const protofield=ProtoField.ipv6("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ipv6(abbr,nil,desc)", () => {
-      ProtoField.ipv6("abbr",undefined,"desc");
+      const protofield=ProtoField.ipv6("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.ether(abbr)", () => {
-      ProtoField.ether("abbr");
+      const protofield=ProtoField.ether("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ether(abbr,name)", () => {
-      ProtoField.ether("abbr","name");
+      const protofield=ProtoField.ether("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.ether(abbr,nil,desc)", () => {
-      ProtoField.ether("abbr",undefined,"desc");
+      const protofield=ProtoField.ether("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.guid(abbr)", () => {
-      ProtoField.guid("abbr");
+      const protofield=ProtoField.guid("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.guid(abbr,name)", () => {
-      ProtoField.guid("abbr","name");
+      const protofield=ProtoField.guid("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.guid(abbr,nil,desc)", () => {
-      ProtoField.guid("abbr",undefined,"desc");
+      const protofield=ProtoField.guid("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.oid(abbr)", () => {
-      ProtoField.oid("abbr");
+      const protofield=ProtoField.oid("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.oid(abbr,name)", () => {
-      ProtoField.oid("abbr","name");
+      const protofield=ProtoField.oid("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.oid(abbr,nil,desc)", () => {
-      ProtoField.oid("abbr",undefined,"desc");
+      const protofield=ProtoField.oid("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.protocol(abbr)", () => {
-      ProtoField.protocol("abbr");
+      const protofield=ProtoField.protocol("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.protocol(abbr,name)", () => {
-      ProtoField.protocol("abbr","name");
+      const protofield=ProtoField.protocol("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.protocol(abbr,nil,desc)", () => {
-      ProtoField.protocol("abbr",undefined,"desc");
+      const protofield=ProtoField.protocol("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.rel_oid(abbr)", () => {
-      ProtoField.rel_oid("abbr");
+      const protofield=ProtoField.rel_oid("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.rel_oid(abbr,name)", () => {
-      ProtoField.rel_oid("abbr","name");
+      const protofield=ProtoField.rel_oid("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.rel_oid(abbr,nil,desc)", () => {
-      ProtoField.rel_oid("abbr",undefined,"desc");
+      const protofield=ProtoField.rel_oid("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.systemid(abbr)", () => {
-      ProtoField.systemid("abbr");
+      const protofield=ProtoField.systemid("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.systemid(abbr,name)", () => {
-      ProtoField.systemid("abbr","name");
+      const protofield=ProtoField.systemid("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.systemid(abbr,nil,desc)", () => {
-      ProtoField.systemid("abbr",undefined,"desc");
+      const protofield=ProtoField.systemid("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.eui64(abbr)", () => {
-      ProtoField.eui64("abbr");
+      const protofield=ProtoField.eui64("abbr");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.eui64(abbr,name)", () => {
-      ProtoField.eui64("abbr","name");
+      const protofield=ProtoField.eui64("abbr","name");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
     recorder.tryPcall("ProtoField.eui64(abbr,nil,desc)", () => {
-      ProtoField.eui64("abbr",undefined,"desc");
+      const protofield=ProtoField.eui64("abbr",undefined,"desc");
+      if(type(protofield)!="userdata"){
+        throw "not userdata";
+      }
     });
   }
   {
     recorder.tryPcall("ProtoField.eui64(abbr)", () => {
       const protofield=ProtoField.none("abbr");
-      tostring(protofield);
+      const s=tostring(protofield);
+      if(type(s)!="string"){
+        throw "not string";
+      }
     });
   }
 
@@ -808,11 +1330,17 @@ test_chapter_11_6();
 function test_chapter_11_6_1_dissector(this: void,buffer: Tvb, pinfo: Pinfo, tree: TreeItem) {
   recorder.tryPcall("dissector:call(tvb, pinfo, tree)", () => {
     const dissector=Dissector.get("http");
-    dissector.call(buffer,pinfo,tree);
+    const result=dissector.call(buffer,pinfo,tree);
+    if(type(result)!="number"){
+      throw "not number";
+    }
   });
   recorder.tryPcall("dissector:__call(tvb, pinfo, tree)", () => {
     const dissector=Dissector.get("http");
-    dissector(buffer,pinfo,tree);
+    const result=dissector(buffer,pinfo,tree);
+    if(type(result)!="number"){
+      throw "not number";
+    }
   });
 }
 
@@ -822,9 +1350,16 @@ function test_chapter_11_6_2_dissector(this: void,buffer: Tvb, pinfo: Pinfo, tre
   });
   recorder.tryPcall("dissectortable:try(pattern,tvb,pinfo,tree)", () => {
     const dissectortable01=DissectorTable.new("tablename_dissector01",undefined,ftypes.UINT8);
-    dissectortable01.try(1,buffer,pinfo,tree);
+    const result01=dissectortable01.try(1,buffer,pinfo,tree);
+    if(type(result01)!="number"){
+      throw "not number";
+    }
+
     const dissectortable02=DissectorTable.new("tablename_dissector02",undefined,ftypes.STRING);
-    dissectortable02.try("1",buffer,pinfo,tree);
+    const result02=dissectortable02.try("1",buffer,pinfo,tree);
+    if(type(result02)!="number"){
+      throw "not number";
+    }
   });
 
 }
