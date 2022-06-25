@@ -972,9 +972,10 @@ interface PrefConstructor {
 
 }
 declare const Pref: PrefConstructor;
-declare interface Prefs extends LuaTable<string, Pref> {
+declare interface Prefs extends LuaTable<string, Pref|PrefValueType> {
   // __newindex(name:string,pref:Pref):void;
-  // __index(name:string):Pref;
+  // why?
+  // __index(name:string):PrefValueType;
 }
 
 declare interface Proto {
@@ -989,7 +990,7 @@ declare interface Proto {
   readonly name: string;
   readonly description: string;
   fields: LuaTable<number, ProtoField>;
-  experts: ProtoExpert;
+  experts: LuaTable<number,ProtoExpert>;
 }
 
 interface ProtoConstructor {

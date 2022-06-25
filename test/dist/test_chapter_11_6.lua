@@ -285,8 +285,8 @@ local function test_chapter_11_6_4()
             local pref = Pref.bool("label", true, "descr")
             prefs.a = pref
             local result = prefs.a
-            if type(result) ~= "userdata" then
-                error("not userdata", 0)
+            if type(result) ~= "boolean" then
+                error("not boolean", 0)
             end
         end
     )
@@ -392,8 +392,8 @@ local function test_chapter_11_6_5()
             e[1] = ProtoExpert.new("abbr", "text", expert.group.DEBUG, expert.severity.NOTE)
             chapter_11_6_5_proto11.experts = e
             local e2 = chapter_11_6_5_proto11.experts
-            if type(e2) ~= "userdata" then
-                error("not userdata", 0)
+            if type(e2) ~= "table" then
+                error("not table", 0)
             end
         end
     )

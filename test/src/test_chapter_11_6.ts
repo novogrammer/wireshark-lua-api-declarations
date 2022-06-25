@@ -209,8 +209,8 @@ function test_chapter_11_6_4(this: void) {
     const pref=Pref.bool("label",true,"descr");
     prefs.set("a",pref);
     const result=prefs.get("a");
-    if(type(result)!="userdata"){
-      throw "not userdata";
+    if(type(result)!="boolean"){
+      throw "not boolean";
     }
   });
 }
@@ -288,8 +288,8 @@ function test_chapter_11_6_5(this: void) {
     e.set(1,ProtoExpert.new("abbr","text",expert.group.DEBUG,expert.severity.NOTE));
     chapter_11_6_5_proto11.experts=e;
     const e2=chapter_11_6_5_proto11.experts;
-    if(type(e2)!="userdata"){
-      throw "not userdata";
+    if(type(e2)!="table"){
+      throw "not table";
     }
 
   });
