@@ -15,6 +15,7 @@ fi
 
 COMMAND_LIST=(
   # tshark
+  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_init.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_1.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_2.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"

@@ -45,6 +45,10 @@ type port_type = int;
 // #region init.lua
 // $ ./make-init-lua.pl ../../ template-init.lua > init.lua
 
+declare function file_exists(this:void,name:string):boolean;
+declare function typeof__is__broken(this:void,obj:any):string;
+
+
 // table as enum
 
 declare enum wtap_encaps {

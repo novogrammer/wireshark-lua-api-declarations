@@ -8,5 +8,14 @@ Based on Wireshark 3.6.2
 
 Now Testing...
 
+## Limitation
+
+`typeof(obj)` is broken because of TypeScript's reserved word.
+
+```
+// declare function typeof(this:void,obj:any):string;
+declare function typeof__is__broken(this:void,obj:any):string;
+```
+
 ## Example
 https://github.com/novogrammer/wireshark-socketio-post-dissector
