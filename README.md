@@ -10,11 +10,32 @@ Now Testing...
 
 ## Limitation
 
+### typeof(obj)
 `typeof(obj)` is broken because of TypeScript's reserved word.
 
+However, You can make equivalent function in TypeScript.
+
+
+init.lua in wireshark
 ```
-// declare function typeof(this:void,obj:any):string;
-declare function typeof__is__broken(this:void,obj:any):string;
+function typeof(obj)
+    local mt = getmetatable(obj)
+    return mt and mt.__typeof or obj.__typeof or type(obj)
+end
+```
+
+your.ts
+```
+function typeof_ts(this:void,obj:any):string{
+  const mt = getmetatable(obj) as any;
+  if(mt!=null && mt.__typeof){
+    return mt.__typeof;
+  }
+  if(obj.__typeof){
+    return obj.__typeof;
+  }
+  return type(obj);
+}
 ```
 
 ## Example

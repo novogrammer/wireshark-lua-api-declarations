@@ -5,6 +5,20 @@ const DUMMYFILE_PATH = "/tmp/dummyfile";
 
 const recorder = new Recorder();
 
+
+
+function typeof_ts(this:void,obj:any):string{
+  const mt = getmetatable(obj) as any;
+  if(mt!=null && mt.__typeof){
+    return mt.__typeof;
+  }
+  if(obj.__typeof){
+    return obj.__typeof;
+  }
+  return type(obj);
+}
+
+
 function test_init(this: void) {
   console.log("begin test_init");
   recorder.tryPcall("file_exists(name)", () => {
@@ -21,6 +35,17 @@ function test_init(this: void) {
       throw "not deleted";
     }
   });
+
+  recorder.tryPcall("typeof_ts(obj)", () => {
+    if(typeof_ts("a")!="string"){
+      throw "not string";
+    }
+    const uint64=UInt64.new();
+    if(typeof_ts(uint64)!="UInt64"){
+      throw "not UInt64";
+    }
+  });
+  
 
   console.log("end test_init");
 }

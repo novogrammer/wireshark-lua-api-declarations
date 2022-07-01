@@ -46,7 +46,8 @@ type port_type = int;
 // $ ./make-init-lua.pl ../../ template-init.lua > init.lua
 
 declare function file_exists(this:void,name:string):boolean;
-declare function typeof__is__broken(this:void,obj:any):string;
+// see README.md
+// declare function typeof(this:void,obj:any):string;
 
 
 // table as enum

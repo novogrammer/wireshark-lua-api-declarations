@@ -5,6 +5,16 @@ local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
 local DUMMYFILE_PATH = "/tmp/dummyfile"
 local recorder = __TS__New(Recorder)
+local function typeof_ts(obj)
+    local mt = getmetatable(obj)
+    if mt ~= nil and mt.__typeof then
+        return mt.__typeof
+    end
+    if obj.__typeof then
+        return obj.__typeof
+    end
+    return type(obj)
+end
 local function test_init()
     print("begin test_init")
     recorder:tryPcall(
@@ -21,6 +31,18 @@ local function test_init()
             os.remove(DUMMYFILE_PATH)
             if file_exists(DUMMYFILE_PATH) then
                 error("not deleted", 0)
+            end
+        end
+    )
+    recorder:tryPcall(
+        "typeof_ts(obj)",
+        function()
+            if typeof_ts("a") ~= "string" then
+                error("not string", 0)
+            end
+            local uint64 = UInt64.new()
+            if typeof_ts(uint64) ~= "UInt64" then
+                error("not UInt64", 0)
             end
         end
     )
