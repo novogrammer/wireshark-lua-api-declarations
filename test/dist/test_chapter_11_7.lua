@@ -360,7 +360,11 @@ local function test_chapter_11_7_1(buffer, tree)
     recorder:tryPcall(
         "treeitem.text",
         function()
-            local subtree = tree:add(protofield_none)
+            local tvbrange = buffer:range(
+                0,
+                buffer:len()
+            )
+            local subtree = tree:add(protofield_uint8, tvbrange, 1, "text")
             local text = subtree.text
             if type(text) ~= "string" then
                 error("not string", 0)

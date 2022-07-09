@@ -245,7 +245,8 @@ function test_chapter_11_7_1(this: void,buffer: Tvb,tree:TreeItem) {
   });
 
   recorder.tryPcall("treeitem.text", () => {
-    const subtree = tree.add(protofield_none);
+    const tvbrange=buffer.range(0,buffer.len());
+    const subtree = tree.add(protofield_uint8,tvbrange,1,"text");
     const text=subtree.text;
     if(type(text)!="string"){
       throw "not string";
