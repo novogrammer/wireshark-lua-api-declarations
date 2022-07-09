@@ -8,6 +8,7 @@ jobs:
   main:
     runs-on: ubuntu-22.04
     steps:
+      - run: sudo apt-cache showpkg
       - run: sudo apt-get install -y tshark xvfb wireshark
         timeout-minutes: 5
       - uses: actions/checkout@v3
