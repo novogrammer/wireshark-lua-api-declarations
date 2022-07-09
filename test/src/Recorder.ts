@@ -19,6 +19,12 @@ interface CalledWithNoError {
 }
 type CalledWithErrorOrNoError = CalledWithError | CalledWithNoError;
 
+const style=(...styles:Array<string>)=>`\x1B[${styles.join(";")}m`;
+const STYLE_RESET="0";
+const STYLE_RED="31";
+const STYLE_GREEN="32";
+const STYLE_BOLD="1";
+
 export default class Recorder {
 
   hasCalledNoErrorResultList: CalledWithErrorOrNoError[] = [];
@@ -39,22 +45,29 @@ export default class Recorder {
       });
     }
   }
+  printWithErrorStyle(text:string){
+    console.log(`${style(STYLE_RED,STYLE_BOLD)}${text}${style(STYLE_RESET)}`);
+
+  }
+  // expect detect `test failed.` to change exit code.
   printFailed() {
-    console.log("test failed.");
+    this.printWithErrorStyle("*** test failed. ***");
   }
   printResult() {
 
     for (let calledWithErrorOrNoError of this.hasCalledNoErrorResultList) {
       if (!calledWithErrorOrNoError.isNoError) {
-        console.log("error detail");
-        console.log(`name: "${calledWithErrorOrNoError.name}"`);
-        console.log(`errorMessage: "${calledWithErrorOrNoError.errorMessage}"`);
+        this.printWithErrorStyle("error detail");
+        this.printWithErrorStyle(`name: "${calledWithErrorOrNoError.name}"`);
+        this.printWithErrorStyle(`errorMessage: "${calledWithErrorOrNoError.errorMessage}"`);
+        this.printWithErrorStyle("error detail");
         this.printFailed();
       }
     }
 
     const totalCount = this.hasCalledNoErrorResultList.length;
     const isNoErrorCount = this.hasCalledNoErrorResultList.filter(({ isNoError }) => isNoError).length;
-    console.log(`result ${isNoErrorCount}/${totalCount}`);
+    const color=isNoErrorCount==totalCount?STYLE_GREEN:STYLE_RED;
+    this.printWithErrorStyle(`*** result ${isNoErrorCount}/${totalCount} ***`);
   }
 }
