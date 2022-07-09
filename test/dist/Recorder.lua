@@ -33,6 +33,9 @@ end
 function Recorder.prototype.printWithErrorStyle(self, text)
     print((style(nil, STYLE_RED, STYLE_BOLD) .. text) .. style(nil, STYLE_RESET))
 end
+function Recorder.prototype.printWithOkStyle(self, text)
+    print((style(nil, STYLE_GREEN, STYLE_BOLD) .. text) .. style(nil, STYLE_RESET))
+end
 function Recorder.prototype.printFailed(self)
     self:printWithErrorStyle("*** test failed. ***")
 end
@@ -55,8 +58,11 @@ function Recorder.prototype.printResult(self)
             return isNoError
         end
     )
-    local color = isNoErrorCount == totalCount and STYLE_GREEN or STYLE_RED
-    self:printWithErrorStyle(((("*** result " .. tostring(isNoErrorCount)) .. "/") .. tostring(totalCount)) .. " ***")
+    if isNoErrorCount == totalCount then
+        self:printWithOkStyle(((("*** result " .. tostring(isNoErrorCount)) .. "/") .. tostring(totalCount)) .. " ***")
+    else
+        self:printWithErrorStyle(((("*** result " .. tostring(isNoErrorCount)) .. "/") .. tostring(totalCount)) .. " ***")
+    end
 end
 ____exports.default = Recorder
 return ____exports

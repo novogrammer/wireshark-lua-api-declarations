@@ -47,7 +47,9 @@ export default class Recorder {
   }
   printWithErrorStyle(text:string){
     console.log(`${style(STYLE_RED,STYLE_BOLD)}${text}${style(STYLE_RESET)}`);
-
+  }
+  printWithOkStyle(text:string){
+    console.log(`${style(STYLE_GREEN,STYLE_BOLD)}${text}${style(STYLE_RESET)}`);
   }
   // expect detect `test failed.` to change exit code.
   printFailed() {
@@ -67,7 +69,12 @@ export default class Recorder {
 
     const totalCount = this.hasCalledNoErrorResultList.length;
     const isNoErrorCount = this.hasCalledNoErrorResultList.filter(({ isNoError }) => isNoError).length;
-    const color=isNoErrorCount==totalCount?STYLE_GREEN:STYLE_RED;
-    this.printWithErrorStyle(`*** result ${isNoErrorCount}/${totalCount} ***`);
+    if(isNoErrorCount==totalCount){
+      this.printWithOkStyle(`*** result ${isNoErrorCount}/${totalCount} ***`);
+    }else{
+      this.printWithErrorStyle(`*** result ${isNoErrorCount}/${totalCount} ***`);
+
+    }
+
   }
 }
