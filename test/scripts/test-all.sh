@@ -8,6 +8,12 @@ PARENT=$(cd $(dirname $0)/.. && pwd)
 
 # tshark -r $PARENT/captures/empty.pcap  -X lua_script:$PARENT/dist/test_chapter_11_1.lua
 
+echo "---"
+tshark --version
+echo "---"
+wireshark --version
+echo "---"
+
 XVFB_RUN=
 if command -v xvfb-run &> /dev/null; then
   XVFB_RUN=xvfb-run

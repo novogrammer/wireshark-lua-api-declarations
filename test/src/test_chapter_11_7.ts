@@ -248,10 +248,10 @@ function test_chapter_11_7_1(this: void,buffer: Tvb,tree:TreeItem) {
     const tvbrange=buffer.range(0,buffer.len());
     const subtree = tree.add(protofield_uint8,tvbrange,1,"text");
     const text=subtree.text;
-    if(type(text)!="string"){
-      throw "not string";
+    if(type(text)!="string" && type(text)!="nil"){
+      throw "not string and not nil)";
     }
-    subtree.text=text;
+    subtree.text="text";
   });
 
   recorder.tryPcall("treeitem.visible", () => {

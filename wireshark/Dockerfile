@@ -1,5 +1,9 @@
 FROM ubuntu:22.04
 
+# RUN apt-get update && apt-get install -yq \
+#     software-properties-common \
+#     && add-apt-repository ppa:wireshark-dev/stable
+
 RUN apt-get update && apt-get install -yq \
     tshark \
     xvfb \

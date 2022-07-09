@@ -1087,7 +1087,7 @@ declare interface TreeItem {
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
   toString(): string;
-  text: string;
+  text: string|null;
   readonly visible: boolean;
   generated: boolean;
   hidden: boolean;

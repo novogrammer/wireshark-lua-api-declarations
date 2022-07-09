@@ -366,10 +366,10 @@ local function test_chapter_11_7_1(buffer, tree)
             )
             local subtree = tree:add(protofield_uint8, tvbrange, 1, "text")
             local text = subtree.text
-            if type(text) ~= "string" then
-                error("not string", 0)
+            if type(text) ~= "string" and type(text) ~= "nil" then
+                error("not string and not nil)", 0)
             end
-            subtree.text = text
+            subtree.text = "text"
         end
     )
     recorder:tryPcall(
