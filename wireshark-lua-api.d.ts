@@ -1070,8 +1070,10 @@ declare function dissect_tcp_pdus(this: void, tvb: Tvb, tree: TreeItem, min_head
 declare interface TreeItem {
   // tvbrange is optional?
   add_packet_field(protofield: ProtoField, tvbrange: TvbRange, encoding: Encoding, ...labels: Array<string>): LuaMultiReturn<[TreeItem | null, FieldInfoValueType | null, int | null]>;
-  add(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
-  add_le(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add(protofield: ProtoField|Proto, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add(protofield: ProtoField|Proto, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add_le(protofield: ProtoField|Proto, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add_le(protofield: ProtoField|Proto, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
   set_text(text: string): TreeItem;
   append_text(text: string): TreeItem;
   prepend_text(text: string): TreeItem;
