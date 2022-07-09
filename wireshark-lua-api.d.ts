@@ -1068,17 +1068,10 @@ declare function dissect_tcp_pdus(this: void, tvb: Tvb, tree: TreeItem, min_head
 
 // #region 11.7. Adding Information To The Dissection Tree
 declare interface TreeItem {
+  // tvbrange is optional?
   add_packet_field(protofield: ProtoField, tvbrange: TvbRange, encoding: Encoding, ...labels: Array<string>): LuaMultiReturn<[TreeItem | null, FieldInfoValueType | null, int | null]>;
-  // overload for tvbrange?:TvbRange
-  add_packet_field(protofield: ProtoField, encoding: Encoding, ...labels: Array<string>): LuaMultiReturn<[TreeItem | null, FieldInfoValueType | null, int | null]>;
-  add(...labels: Array<string>): TreeItem;
-  add(protofield: ProtoField, ...labels: Array<string>): TreeItem;
-  add(protofield: ProtoField, tvbrange: TvbRange, ...labels: Array<string>): TreeItem;
-  add(protofield: ProtoField, tvbrange: TvbRange, value: FieldInfoValueType, ...labels: Array<string>): TreeItem;
-  add_le(...labels: Array<string>): TreeItem;
-  add_le(protofield: ProtoField, ...labels: Array<string>): TreeItem;
-  add_le(protofield: ProtoField, tvbrange: TvbRange, ...labels: Array<string>): TreeItem;
-  add_le(protofield: ProtoField, tvbrange: TvbRange, value: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
+  add_le(protofield?: ProtoField, tvbrange?: TvbRange, value?: FieldInfoValueType, ...labels: Array<string>): TreeItem;
   set_text(text: string): TreeItem;
   append_text(text: string): TreeItem;
   prepend_text(text: string): TreeItem;
