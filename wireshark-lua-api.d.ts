@@ -1097,7 +1097,7 @@ declare interface TreeItem {
 
 // #region 11.8. Functions For Handling Packet Data
 declare interface ByteArray {
-  __concat: LuaConcatMethod<ByteArray, ByteArray>;
+  // see ByteArrayConstructor.__concat()
   // __eq(rhs:ByteArray):boolean;
   prepend(prepended: ByteArray): void;
   append(appended: ByteArray): void;
@@ -1114,8 +1114,10 @@ declare interface ByteArray {
   toString(): string;
   tvb(name: string): Tvb;
 }
+
 interface ByteArrayConstructor {
   new: (this: void, hexbytes?: string, separator?: string | boolean) => ByteArray;
+  __concat: LuaConcat<ByteArray, ByteArray, ByteArray>;
 }
 declare const ByteArray: ByteArrayConstructor;
 
@@ -1138,19 +1140,19 @@ declare interface TvbRange {
   tvb(): Tvb;
   uint(): guint32;
   le_uint(): guint32;
-  UInt64(): UInt64;
-  le_UInt64(): UInt64;
+  uint64(): UInt64;
+  le_uint64(): UInt64;
   int(): gint32;
   le_int(): gint32;
-  Int64(): Int64;
-  le_Int64(): Int64;
+  int64(): Int64;
+  le_int64(): Int64;
   float(): double;
   le_float(): double;
   ipv4(): Address;
   le_ipv4(): Address;
   ipv6(): Address;
   ether(): Address;
-  nstime(encoding?: Encoding): NSTime;
+  nstime(encoding?: Encoding): LuaMultiReturn<[NSTime,number]>;
   le_nstime(encoding?: Encoding): NSTime;
   string(encoding?: Encoding): string;
   ustring(): string;
