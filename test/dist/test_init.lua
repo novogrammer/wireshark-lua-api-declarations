@@ -3,18 +3,10 @@ require("lualib_bundle");
 local ____exports = {}
 local ____Recorder = require("Recorder")
 local Recorder = ____Recorder.default
+local ____utils = require("utils")
+local typeof_ts = ____utils.typeof_ts
 local DUMMYFILE_PATH = "/tmp/dummyfile"
 local recorder = __TS__New(Recorder)
-local function typeof_ts(obj)
-    local mt = getmetatable(obj)
-    if mt ~= nil and mt.__typeof then
-        return mt.__typeof
-    end
-    if obj.__typeof then
-        return obj.__typeof
-    end
-    return type(obj)
-end
 local function test_init()
     print("begin test_init")
     recorder:tryPcall(

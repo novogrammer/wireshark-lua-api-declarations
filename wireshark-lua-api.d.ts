@@ -1190,7 +1190,7 @@ declare interface CaptureInfo {
   os: string | null;
   user_app: string | null;
   hosts: LuaTable<string, LuaTable<number, LuaTable<string, string>>> | null;
-  private_table: LuaTable;
+  private_table: LuaTable | null;
 }
 declare interface CaptureInfoConst {
   // __tostring():string;
@@ -1204,7 +1204,7 @@ declare interface CaptureInfoConst {
   readonly os: string | null;
   readonly user_app: string | null;
   readonly hosts: LuaTable<string, LuaTable<number, LuaTable<string, string>>> | null;
-  private_table: LuaTable;
+  private_table: LuaTable | null;
 }
 type FileReadParam = "*n" | "*a" | "*l" | int;
 type FileWriteParam = string | number;

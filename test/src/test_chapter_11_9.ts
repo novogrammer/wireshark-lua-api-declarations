@@ -1,5 +1,6 @@
 
 import Recorder from "./Recorder";
+import { typeof_ts } from "./utils";
 
 const recorder = new Recorder();
 
@@ -37,16 +38,257 @@ function test_chapter_11_9(this: void){
   }
 
 
-  function test_chapter_11_9_1(this: void,capture:CaptureInfo) {
-    recorder.tryPcall("todo", () => {
-      throw "todo";
+  function test_chapter_11_9_1(this: void,captureinfo:CaptureInfo) {
+
+    if(true){
+      console.log("captureinfo:__tostring() SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo:__tostring()", () => {
+        const result=tostring(captureinfo);
+        if(type(result)!="string"){
+          throw "not string";
+        }
+      });
+    }
+    recorder.tryPcall("captureinfo.encap", () => {
+      const result=captureinfo.encap;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      captureinfo.encap=result;
+    });
+    recorder.tryPcall("captureinfo.time_precision", () => {
+      const result=captureinfo.time_precision;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      captureinfo.time_precision=result;
+    });
+    recorder.tryPcall("captureinfo.snapshot_length", () => {
+      const result=captureinfo.snapshot_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      captureinfo.snapshot_length=result;
+    });
+    if(true){
+      console.log("captureinfo.comment SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo.comment", () => {
+        const result=captureinfo.comment;
+        // why CaptureInfo ?
+        // console.log(`typeof_ts(result): ${typeof_ts(result)}`);
+
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+        captureinfo.comment="abc";
+        const result2=captureinfo.comment;
+        if(type(result2)!="string"){
+          throw "not string";
+        }
+        captureinfo.comment=null;
+  
+      });
+    }
+    if(true){
+      console.log("captureinfo.hardware SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo.hardware", () => {
+        const result=captureinfo.hardware;
+  
+        // why CaptureInfo ?
+        // console.log(`typeof_ts(result): ${typeof_ts(result)}`);
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+        captureinfo.hardware="abc";
+        const result2=captureinfo.hardware;
+        if(type(result2)!="string"){
+          throw "not string";
+        }
+        captureinfo.hardware=null;
+      });
+    }
+    if(true){
+      console.log("captureinfo.os SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo.os", () => {
+        const result=captureinfo.os;
+  
+        // why CaptureInfo ?
+        // console.log(`typeof_ts(result): ${typeof_ts(result)}`);
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+        captureinfo.os="abc";
+        const result2=captureinfo.os;
+        if(type(result2)!="string"){
+          throw "not string";
+        }
+        captureinfo.os=null;
+      });
+    }
+    if(true){
+      console.log("captureinfo.user_app SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo.user_app", () => {
+        const result=captureinfo.user_app;
+  
+        // why CaptureInfo ?
+        // console.log(`typeof_ts(result): ${typeof_ts(result)}`);
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+        captureinfo.user_app="abc";
+        const result2=captureinfo.user_app;
+        if(type(result2)!="string"){
+          throw "not string";
+        }
+        captureinfo.user_app=null;
+      });
+    }
+    if(true){
+      console.log("captureinfo.hosts SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfo.hosts", () => {
+        const ipv4_addresse=new LuaTable<string,string>();
+        ipv4_addresse.set("addr","\x01\x02\x03\x04");
+        ipv4_addresse.set("name","foo.com");
+        const ipv4_addresses=new LuaTable<number,LuaTable<string,string>>();
+        ipv4_addresses.set(1,ipv4_addresse);
+        const hosts=new LuaTable<string,LuaTable<number,LuaTable<string,string>>>();
+        hosts.set("ipv4_addresses",ipv4_addresses);
+        // raise usage error
+        captureinfo.hosts=hosts;
+      });
+    }
+
+    recorder.tryPcall("captureinfo.private_table", () => {
+      const result=captureinfo.private_table;
+      if(type(result)!="nil"){
+        throw "not nil";
+      }
+      const t=new LuaTable();
+      t.set("a","b");
+      captureinfo.private_table=t;
+      const result2=captureinfo.private_table;
+      if(type(result2)!="table"){
+        throw "not table";
+      }
+      captureinfo.private_table=null;
     });
   
   }
-  function test_chapter_11_9_2(this: void,capture:CaptureInfoConst) {
-    recorder.tryPcall("todo", () => {
-      throw "todo";
+
+
+  function test_chapter_11_9_2(this: void,captureinfo:CaptureInfoConst) {
+
+    if(false){
+      console.log("captureinfoconst:__tostring() SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst:__tostring()", () => {
+        const result=tostring(captureinfo);
+        if(type(result)!="string"){
+          throw "not string";
+        }
+      });
+    }
+    recorder.tryPcall("captureinfoconst.type", () => {
+      const result=captureinfo.type;
+      if(type(result)!="number"){
+        throw "not number";
+      }
     });
+    recorder.tryPcall("captureinfoconst.snapshot_length", () => {
+      const result=captureinfo.snapshot_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+    recorder.tryPcall("captureinfoconst.encap", () => {
+      const result=captureinfo.encap;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+
+    if(true){
+      console.log("captureinfoconst.comment SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst.comment", () => {
+        // why raise error?
+        const result=captureinfo.comment;
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+        captureinfo.comment="abc";
+        const result2=captureinfo.comment;
+        if(type(result2)!="string"){
+          throw "not string";
+        }
+        captureinfo.comment=null;
+      });
+    }
+    if(true){
+      console.log("captureinfoconst.hardware SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst.hardware", () => {
+        // why raise error?
+        const result=captureinfo.hardware;
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+      });
+    }
+    if(true){
+      console.log("captureinfoconst.os SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst.os", () => {
+        // why raise error?
+        const result=captureinfo.os;
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+      });
+    }
+    if(true){
+      console.log("captureinfoconst.user_app SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst.user_app", () => {
+        // why raise error?
+        const result=captureinfo.user_app;
+        if(type(result)!="nil"){
+          throw "not nil";
+        }
+      });
+    }
+    if(false){
+      console.log("captureinfoconst.hosts SKIPPED");
+    }else{
+      recorder.tryPcall("captureinfoconst.hosts", () => {
+        const result=captureinfo.hosts;
+        if(type(result)!="table"){
+          throw "not table";
+        }
+      });
+    }
+
+    recorder.tryPcall("captureinfoconst.private_table", () => {
+      const result=captureinfo.private_table;
+      if(type(result)!="nil"){
+        throw "not nil";
+      }
+      const t=new LuaTable();
+      t.set("a","b");
+      captureinfo.private_table=t;
+      const result2=captureinfo.private_table;
+      if(type(result2)!="table"){
+        throw "not table";
+      }
+      captureinfo.private_table=null;
+    });
+
   
   }
   function test_chapter_11_9_3(this: void,file:File) {

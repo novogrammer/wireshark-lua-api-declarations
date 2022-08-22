@@ -27,19 +27,288 @@ local function test_chapter_11_9()
         local count = fileHandlerWriteCountTable[eventName]
         fileHandlerWriteCountTable[eventName] = count + 1
     end
-    local function test_chapter_11_9_1(capture)
+    local function test_chapter_11_9_1(captureinfo)
+        if true then
+            print("captureinfo:__tostring() SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo:__tostring()",
+                function()
+                    local result = tostring(captureinfo)
+                    if type(result) ~= "string" then
+                        error("not string", 0)
+                    end
+                end
+            )
+        end
         recorder:tryPcall(
-            "todo",
+            "captureinfo.encap",
             function()
-                error("todo", 0)
+                local result = captureinfo.encap
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                captureinfo.encap = result
+            end
+        )
+        recorder:tryPcall(
+            "captureinfo.time_precision",
+            function()
+                local result = captureinfo.time_precision
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                captureinfo.time_precision = result
+            end
+        )
+        recorder:tryPcall(
+            "captureinfo.snapshot_length",
+            function()
+                local result = captureinfo.snapshot_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                captureinfo.snapshot_length = result
+            end
+        )
+        if true then
+            print("captureinfo.comment SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo.comment",
+                function()
+                    local result = captureinfo.comment
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                    captureinfo.comment = "abc"
+                    local result2 = captureinfo.comment
+                    if type(result2) ~= "string" then
+                        error("not string", 0)
+                    end
+                    captureinfo.comment = nil
+                end
+            )
+        end
+        if true then
+            print("captureinfo.hardware SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo.hardware",
+                function()
+                    local result = captureinfo.hardware
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                    captureinfo.hardware = "abc"
+                    local result2 = captureinfo.hardware
+                    if type(result2) ~= "string" then
+                        error("not string", 0)
+                    end
+                    captureinfo.hardware = nil
+                end
+            )
+        end
+        if true then
+            print("captureinfo.os SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo.os",
+                function()
+                    local result = captureinfo.os
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                    captureinfo.os = "abc"
+                    local result2 = captureinfo.os
+                    if type(result2) ~= "string" then
+                        error("not string", 0)
+                    end
+                    captureinfo.os = nil
+                end
+            )
+        end
+        if true then
+            print("captureinfo.user_app SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo.user_app",
+                function()
+                    local result = captureinfo.user_app
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                    captureinfo.user_app = "abc"
+                    local result2 = captureinfo.user_app
+                    if type(result2) ~= "string" then
+                        error("not string", 0)
+                    end
+                    captureinfo.user_app = nil
+                end
+            )
+        end
+        if true then
+            print("captureinfo.hosts SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfo.hosts",
+                function()
+                    local ipv4_addresse = {}
+                    ipv4_addresse.addr = ""
+                    ipv4_addresse.name = "foo.com"
+                    local ipv4_addresses = {}
+                    ipv4_addresses[1] = ipv4_addresse
+                    local hosts = {}
+                    hosts.ipv4_addresses = ipv4_addresses
+                    captureinfo.hosts = hosts
+                end
+            )
+        end
+        recorder:tryPcall(
+            "captureinfo.private_table",
+            function()
+                local result = captureinfo.private_table
+                if type(result) ~= "nil" then
+                    error("not nil", 0)
+                end
+                local t = {}
+                t.a = "b"
+                captureinfo.private_table = t
+                local result2 = captureinfo.private_table
+                if type(result2) ~= "table" then
+                    error("not table", 0)
+                end
+                captureinfo.private_table = nil
             end
         )
     end
-    local function test_chapter_11_9_2(capture)
+    local function test_chapter_11_9_2(captureinfo)
+        if false then
+            print("captureinfoconst:__tostring() SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst:__tostring()",
+                function()
+                    local result = tostring(captureinfo)
+                    if type(result) ~= "string" then
+                        error("not string", 0)
+                    end
+                end
+            )
+        end
         recorder:tryPcall(
-            "todo",
+            "captureinfoconst.type",
             function()
-                error("todo", 0)
+                local result = captureinfo.type
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "captureinfoconst.snapshot_length",
+            function()
+                local result = captureinfo.snapshot_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "captureinfoconst.encap",
+            function()
+                local result = captureinfo.encap
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        if true then
+            print("captureinfoconst.comment SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst.comment",
+                function()
+                    local result = captureinfo.comment
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                    captureinfo.comment = "abc"
+                    local result2 = captureinfo.comment
+                    if type(result2) ~= "string" then
+                        error("not string", 0)
+                    end
+                    captureinfo.comment = nil
+                end
+            )
+        end
+        if true then
+            print("captureinfoconst.hardware SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst.hardware",
+                function()
+                    local result = captureinfo.hardware
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                end
+            )
+        end
+        if true then
+            print("captureinfoconst.os SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst.os",
+                function()
+                    local result = captureinfo.os
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                end
+            )
+        end
+        if true then
+            print("captureinfoconst.user_app SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst.user_app",
+                function()
+                    local result = captureinfo.user_app
+                    if type(result) ~= "nil" then
+                        error("not nil", 0)
+                    end
+                end
+            )
+        end
+        if false then
+            print("captureinfoconst.hosts SKIPPED")
+        else
+            recorder:tryPcall(
+                "captureinfoconst.hosts",
+                function()
+                    local result = captureinfo.hosts
+                    if type(result) ~= "table" then
+                        error("not table", 0)
+                    end
+                end
+            )
+        end
+        recorder:tryPcall(
+            "captureinfoconst.private_table",
+            function()
+                local result = captureinfo.private_table
+                if type(result) ~= "nil" then
+                    error("not nil", 0)
+                end
+                local t = {}
+                t.a = "b"
+                captureinfo.private_table = t
+                local result2 = captureinfo.private_table
+                if type(result2) ~= "table" then
+                    error("not table", 0)
+                end
+                captureinfo.private_table = nil
             end
         )
     end

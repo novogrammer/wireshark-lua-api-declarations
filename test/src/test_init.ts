@@ -1,5 +1,6 @@
 
 import Recorder from "./Recorder";
+import { typeof_ts } from "./utils";
 
 const DUMMYFILE_PATH = "/tmp/dummyfile";
 
@@ -7,16 +8,7 @@ const recorder = new Recorder();
 
 
 
-function typeof_ts(this:void,obj:any):string{
-  const mt = getmetatable(obj) as any;
-  if(mt!=null && mt.__typeof){
-    return mt.__typeof;
-  }
-  if(obj.__typeof){
-    return obj.__typeof;
-  }
-  return type(obj);
-}
+
 
 
 function test_init(this: void) {
