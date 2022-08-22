@@ -1208,7 +1208,8 @@ declare interface CaptureInfoConst {
 }
 type FileReadParam = "*n" | "*a" | "*l" | int;
 type FileWriteParam = string | number;
-type LinesIteratorFunction = () => string;
+// see io.lines
+type LinesIteratorFunction = LuaIterable<LuaMultiReturn<[string]>, undefined>;
 declare interface File {
   read(...fileReadParams: Array<FileReadParam>): LuaMultiReturn<[...Array<string | number>]> | LuaMultiReturn<[null]>;
   // double as gint64
@@ -1220,17 +1221,17 @@ declare interface File {
   toString(): string;
   readonly compressed: boolean;
 }
-type FileReadOpenFunction = (file: File, capture: CaptureInfo) => boolean;
+type FileReadOpenFunction = (this: void,file: File, capture: CaptureInfo) => boolean;
 // double as gint64
-type FileReadFunction = (file: File, capture: CaptureInfo, frame: FrameInfo) => false | double;
+type FileReadFunction = (this: void,file: File, capture: CaptureInfo, frame: FrameInfo) => false | double;
 // double as gint64
-type FileSeekReadFunction = (file: File, capture: CaptureInfo, frame: FrameInfo, offset: double) => boolean | double;
-type FileReadCloseFunction = (file: File, capture: CaptureInfo) => void;
-type FileSeqReadCloseFunction = (file: File, capture: CaptureInfo) => void;
-type FileCanWriteEncapFunction = (encap: wtap_encaps) => boolean;
-type FileWriteOpenFunction = (file: File, capture: CaptureInfoConst) => boolean;
-type FileWriteFunction = (file: File, capture: CaptureInfoConst, frame: FrameInfoConst) => boolean;
-type FileWriteFinishFunction = () => boolean;
+type FileSeekReadFunction = (this: void,file: File, capture: CaptureInfo, frame: FrameInfo, offset: double) => boolean | double;
+type FileReadCloseFunction = (this: void,file: File, capture: CaptureInfo) => void;
+type FileSeqReadCloseFunction = (this: void,file: File, capture: CaptureInfo) => void;
+type FileCanWriteEncapFunction = (this: void,encap: wtap_encaps) => boolean;
+type FileWriteOpenFunction = (this: void,file: File, capture: CaptureInfoConst) => boolean;
+type FileWriteFunction = (this: void,file: File, capture: CaptureInfoConst, frame: FrameInfoConst) => boolean;
+type FileWriteCloseFunction = (this: void,file: File, capture: CaptureInfoConst) => boolean;
 declare interface FileHandler {
   // __tostring():string;
   // foo.toString() transpile to tostring(foo)
@@ -1252,7 +1253,8 @@ declare interface FileHandler {
   // Mode: Assign only.
   write: FileWriteFunction;
   // Mode: Assign only.
-  write_finish: FileWriteFinishFunction;
+  // it is not write_close
+  write_close: FileWriteCloseFunction;
   readonly type: wtap_filetypes;
   extensions: string;
   writing_must_seek: boolean;
@@ -1262,7 +1264,7 @@ declare interface FileHandler {
 }
 type TypeOfFileHandler = "r" | "w" | "rw" | "m" | "s";
 interface FileHandlerConstructor {
-  new: (this: void, description: string, name: string, internal_description: string, type: TypeOfFileHandler) => FileHandler | LuaErrorString;
+  new: (this: void, description: string, name: string, internal_description: string, type: TypeOfFileHandler) => FileHandler;
 }
 declare const FileHandler: FileHandlerConstructor;
 declare interface FrameInfo {

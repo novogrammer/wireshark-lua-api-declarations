@@ -1,0 +1,3 @@
+write_open
+write
+write_close

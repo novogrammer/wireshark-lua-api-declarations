@@ -11,3 +11,4 @@ services:
     tty: true
     working_dir: /test
     command: /test/scripts/test-all.sh
+    # command: /test/scripts/find_save_fmts.sh

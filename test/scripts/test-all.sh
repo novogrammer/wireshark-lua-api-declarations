@@ -18,7 +18,7 @@ XVFB_RUN=
 if command -v xvfb-run &> /dev/null; then
   XVFB_RUN=xvfb-run
 fi
-
+# try "--log-level=noisy"
 COMMAND_LIST=(
   # tshark
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_init.lua"
@@ -30,7 +30,7 @@ COMMAND_LIST=(
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_6.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_7.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_8.lua"
-  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_9.lua"
+  "tshark --log-level=noisy -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_9.lua -r $PARENT/captures/file_read.txt -w $PARENT/captures/file_write.txt -F name-write"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_10.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_11.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_12.lua"
