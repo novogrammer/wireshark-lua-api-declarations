@@ -465,17 +465,157 @@ function test_chapter_11_9(this: void){
     });
   
   }
-  function test_chapter_11_9_5(this: void,frame:FrameInfo) {
-    recorder.tryPcall("todo", () => {
-      throw "todo";
+  function test_chapter_11_9_5(this: void,frameinfo:FrameInfo,file:File) {
+
+    if(true){
+      console.log("frameinfo:__tostring() SKIPPED");
+    }else{
+      recorder.tryPcall("frameinfo:__tostring()", () => {
+        // raise invalid option error
+        const result=tostring(frameinfo);
+        if(type(result)!="string"){
+          throw "not string";
+        }
+      });
+    }
+
+    recorder.tryPcall("frameinfo:read_data(file, length)", () => {
+      const [result]=frameinfo.read_data(file,0);
+      if(type(result)!="boolean"){
+        throw "not boolean";
+      }
+    });
+    recorder.tryPcall("frameinfo.comment", () => {
+      const result=frameinfo.comment;
+      if(type(result)!="table"){
+        throw "not table";
+      }
+      frameinfo.comment=result;
+    });
+    recorder.tryPcall("frameinfo.time", () => {
+      const result=frameinfo.time;
+      if(type(result)!="userdata"){
+        throw "not userdata";
+      }
+      frameinfo.time=result;
+    });
+    recorder.tryPcall("frameinfo.data", () => {
+      const result=frameinfo.data;
+      if(type(result)!="string"){
+        throw "not string";
+      }
+      frameinfo.data=result;
+    });
+    recorder.tryPcall("frameinfo.rec_type", () => {
+      const result=frameinfo.rec_type;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      frameinfo.rec_type=result;
+    });
+    recorder.tryPcall("frameinfo.flags", () => {
+      const result=frameinfo.flags;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      frameinfo.flags=result;
+    });
+    recorder.tryPcall("frameinfo.captured_length", () => {
+      const result=frameinfo.captured_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      frameinfo.captured_length=result;
+    });
+    recorder.tryPcall("frameinfo.original_length", () => {
+      const result=frameinfo.original_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      frameinfo.original_length=result;
+    });
+    recorder.tryPcall("frameinfo.encap", () => {
+      const result=frameinfo.encap;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+      frameinfo.encap=result;
     });
   
   }
-  function test_chapter_11_9_6(this: void,frame:FrameInfoConst) {
-    recorder.tryPcall("todo", () => {
-      throw "todo";
+  function test_chapter_11_9_6(this: void,frameinfoconst:FrameInfoConst,file:File) {
+
+    if(true){
+      console.log("frameinfoconst:__tostring() SKIPPED");
+    }else{
+      recorder.tryPcall("frameinfoconst:__tostring()", () => {
+        // raise invalid option error
+        const result=tostring(frameinfoconst);
+        if(type(result)!="string"){
+          throw "not string";
+        }
+      });
+    }
+    recorder.tryPcall("frameinfoconst:write_data(file)", () => {
+      const [result]=frameinfoconst.write_data(file);
+      if(type(result)!="boolean"){
+        throw "not boolean";
+      }
     });
-  
+    recorder.tryPcall("frameinfoconst:write_data(file, length)", () => {
+      const [result]=frameinfoconst.write_data(file,0);
+      if(type(result)!="boolean"){
+        throw "not boolean";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.comment", () => {
+      const result=frameinfoconst.comment;
+      if(type(result)!="table"){
+        throw "not table";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.time", () => {
+      const result=frameinfoconst.time;
+      if(type(result)!="userdata"){
+        throw "not userdata";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.data", () => {
+      const result=frameinfoconst.data;
+      if(type(result)!="string"){
+        throw "not string";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.rec_type", () => {
+      const result=frameinfoconst.rec_type;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.flags", () => {
+      const result=frameinfoconst.flags;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.captured_length", () => {
+      const result=frameinfoconst.captured_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.original_length", () => {
+      const result=frameinfoconst.original_length;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
+    recorder.tryPcall("frameinfoconst.encap", () => {
+      const result=frameinfoconst.encap;
+      if(type(result)!="number"){
+        throw "not number";
+      }
+    });
   }
   function test_chapter_11_9_7(this: void) {
     recorder.tryPcall("register_filehandler(filehandler)", () => {
@@ -531,7 +671,7 @@ function test_chapter_11_9(this: void){
       const [line]=file.read(3);
       console.log(`line: ${line}`);
       frame.rec_type=wtap_rec_types.PACKET;
-      test_chapter_11_9_5(frame);
+      test_chapter_11_9_5(frame,file);
       return 3;
     }
 
@@ -585,7 +725,7 @@ function test_chapter_11_9(this: void){
     console.log("filehandler_write.write");
     countWriteEvent("write");
     file.write("write\n");
-    test_chapter_11_9_6(frame);
+    test_chapter_11_9_6(frame,file);
     return true;
   }
   

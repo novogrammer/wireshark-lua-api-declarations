@@ -567,19 +567,212 @@ local function test_chapter_11_9()
             end
         )
     end
-    local function test_chapter_11_9_5(frame)
+    local function test_chapter_11_9_5(frameinfo, file)
+        if true then
+            print("frameinfo:__tostring() SKIPPED")
+        else
+            recorder:tryPcall(
+                "frameinfo:__tostring()",
+                function()
+                    local result = tostring(frameinfo)
+                    if type(result) ~= "string" then
+                        error("not string", 0)
+                    end
+                end
+            )
+        end
         recorder:tryPcall(
-            "todo",
+            "frameinfo:read_data(file, length)",
             function()
-                error("todo", 0)
+                local result = frameinfo:read_data(file, 0)
+                if type(result) ~= "boolean" then
+                    error("not boolean", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.comment",
+            function()
+                local result = frameinfo.comment
+                if type(result) ~= "table" then
+                    error("not table", 0)
+                end
+                frameinfo.comment = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.time",
+            function()
+                local result = frameinfo.time
+                if type(result) ~= "userdata" then
+                    error("not userdata", 0)
+                end
+                frameinfo.time = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.data",
+            function()
+                local result = frameinfo.data
+                if type(result) ~= "string" then
+                    error("not string", 0)
+                end
+                frameinfo.data = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.rec_type",
+            function()
+                local result = frameinfo.rec_type
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                frameinfo.rec_type = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.flags",
+            function()
+                local result = frameinfo.flags
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                frameinfo.flags = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.captured_length",
+            function()
+                local result = frameinfo.captured_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                frameinfo.captured_length = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.original_length",
+            function()
+                local result = frameinfo.original_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                frameinfo.original_length = result
+            end
+        )
+        recorder:tryPcall(
+            "frameinfo.encap",
+            function()
+                local result = frameinfo.encap
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+                frameinfo.encap = result
             end
         )
     end
-    local function test_chapter_11_9_6(frame)
+    local function test_chapter_11_9_6(frameinfoconst, file)
+        if true then
+            print("frameinfoconst:__tostring() SKIPPED")
+        else
+            recorder:tryPcall(
+                "frameinfoconst:__tostring()",
+                function()
+                    local result = tostring(frameinfoconst)
+                    if type(result) ~= "string" then
+                        error("not string", 0)
+                    end
+                end
+            )
+        end
         recorder:tryPcall(
-            "todo",
+            "frameinfoconst:write_data(file)",
             function()
-                error("todo", 0)
+                local result = frameinfoconst:write_data(file)
+                if type(result) ~= "boolean" then
+                    error("not boolean", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst:write_data(file, length)",
+            function()
+                local result = frameinfoconst:write_data(file, 0)
+                if type(result) ~= "boolean" then
+                    error("not boolean", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.comment",
+            function()
+                local result = frameinfoconst.comment
+                if type(result) ~= "table" then
+                    error("not table", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.time",
+            function()
+                local result = frameinfoconst.time
+                if type(result) ~= "userdata" then
+                    error("not userdata", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.data",
+            function()
+                local result = frameinfoconst.data
+                if type(result) ~= "string" then
+                    error("not string", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.rec_type",
+            function()
+                local result = frameinfoconst.rec_type
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.flags",
+            function()
+                local result = frameinfoconst.flags
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.captured_length",
+            function()
+                local result = frameinfoconst.captured_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.original_length",
+            function()
+                local result = frameinfoconst.original_length
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
+            end
+        )
+        recorder:tryPcall(
+            "frameinfoconst.encap",
+            function()
+                local result = frameinfoconst.encap
+                if type(result) ~= "number" then
+                    error("not number", 0)
+                end
             end
         )
     end
@@ -628,7 +821,7 @@ local function test_chapter_11_9()
             local line = file:read(3)
             print("line: " .. tostring(line))
             frame.rec_type = wtap_rec_types.PACKET
-            test_chapter_11_9_5(frame)
+            test_chapter_11_9_5(frame, file)
             return 3
         end
         return false
@@ -671,7 +864,7 @@ local function test_chapter_11_9()
         print("filehandler_write.write")
         countWriteEvent(nil, "write")
         file:write("write\n")
-        test_chapter_11_9_6(frame)
+        test_chapter_11_9_6(frame, file)
         return true
     end
     filehandler_write.write_close = function(file, capture)
