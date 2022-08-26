@@ -1305,19 +1305,20 @@ declare function deregister_filehandler(this: void, filehandler: FileHandler): v
 // #region 11.10. Directory Handling Functions
 
 declare interface Dir {
-  personal_config_path(filename?: string): string;
-  global_config_path(filename?: string): string;
-  personal_plugins_path(): string;
-  global_plugins_path(): string;
   // string|void ?
   (this: void): string | null;
+  close():void;
 }
 interface DirConstructor {
-  make(name: string): boolean | null;
-  exists(name: string): boolean | null;
-  remove(name: string): boolean | null;
-  remove_all(name: string): boolean | null;
-  open(pathname: string, extension?: string): Dir;
+  make(this: void,name: string): boolean | null;
+  exists(this: void,name: string): boolean | null;
+  remove(this: void,name: string): boolean | null;
+  remove_all(this: void,name: string): boolean | null;
+  open(this: void,pathname: string, extension?: string): Dir;
+  personal_config_path(this: void,filename?: string): string;
+  global_config_path(this: void,filename?: string): string;
+  personal_plugins_path(this: void): string;
+  global_plugins_path(this: void): string;
 }
 declare const Dir: DirConstructor;
 // #endregion
