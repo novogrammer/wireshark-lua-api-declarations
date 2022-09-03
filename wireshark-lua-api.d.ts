@@ -1324,6 +1324,7 @@ declare const Dir: DirConstructor;
 // #endregion
 
 // #region 11.11. Wtap Functions For Handling Capture File Types
+declare function wtap_file_type_subtype_description(this: void, filetype: wtap_filetypes): string | null;
 declare function wtap_file_type_subtype_name(this: void, filetype: wtap_filetypes): string | null;
 declare function wtap_name_to_file_type_subtype(this: void, name: string): wtap_filetypes | null;
 declare function wtap_pcap_file_type_subtype(this: void): wtap_filetypes;
