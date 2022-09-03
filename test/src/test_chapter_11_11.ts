@@ -61,9 +61,9 @@ function test_chapter_11_11_1(this: void) {
 }
 
 function test_chapter_11_11(this: void) {
-  console.log("begin test_chapter_11_10");
+  console.log("begin test_chapter_11_11");
   test_chapter_11_11_1();
-  console.log("end test_chapter_11_10");
+  console.log("end test_chapter_11_11");
 }
 
 test_chapter_11_11();

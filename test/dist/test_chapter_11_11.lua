@@ -76,9 +76,9 @@ local function test_chapter_11_11_1()
     )
 end
 local function test_chapter_11_11()
-    print("begin test_chapter_11_10")
+    print("begin test_chapter_11_11")
     test_chapter_11_11_1()
-    print("end test_chapter_11_10")
+    print("end test_chapter_11_11")
 end
 test_chapter_11_11()
 recorder:printResult()
