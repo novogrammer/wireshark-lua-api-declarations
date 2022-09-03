@@ -1334,7 +1334,7 @@ declare function wtap_pcapng_file_type_subtype(this: void): wtap_filetypes;
 
 // #region 11.12. Utility Functions
 declare function get_version(this: void): string;
-declare function set_plugin_info(this: void, table: LuaTable): void;
+declare function set_plugin_info(this: void, table: LuaTable<string,string>): void;
 declare function format_date(this: void, timestamp: Timestamp): string;
 declare function format_time(this: void, timestamp: Timestamp): string;
 declare function get_preference(this: void, preference: string): PrefValueType | null;
