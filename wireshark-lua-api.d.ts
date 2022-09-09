@@ -1383,9 +1383,9 @@ declare interface Int64 {
 interface Int64Constructor {
   decode: (this: void, string: string, endian?: boolean) => Int64 | null;
   new: (this: void, value?: number | UInt64 | Int64 | string, highvalue?: guint32) => Int64;
-  max(): Int64;
-  min(): Int64;
-  fromhex(hex: string): Int64;
+  max(this: void): Int64;
+  min(this: void): Int64;
+  fromhex(this: void, hex: string): Int64;
 }
 declare const Int64: Int64Constructor;
 
@@ -1424,9 +1424,9 @@ declare interface UInt64 {
 interface UInt64Constructor {
   decode: (this: void, string: string, endian?: boolean) => UInt64 | null;
   new: (this: void, value?: number | UInt64 | Int64 | string, highvalue?: guint32) => UInt64;
-  max(): UInt64;
-  min(): UInt64;
-  fromhex(hex: string): UInt64;
+  max(this: void): UInt64;
+  min(this: void): UInt64;
+  fromhex(this: void, hex: string): UInt64;
 }
 declare const UInt64: UInt64Constructor;
 

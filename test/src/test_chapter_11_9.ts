@@ -153,7 +153,8 @@ function test_chapter_11_9(this: void){
     }else{
       recorder.tryPcall("captureinfo.hosts", () => {
         const ipv4_addresse=new LuaTable<string,string>();
-        ipv4_addresse.set("addr","\x01\x02\x03\x04");
+        const s=String.fromCharCode(0x01,0x02,0x03,0x04);
+        ipv4_addresse.set("addr",s);
         ipv4_addresse.set("name","foo.com");
         const ipv4_addresses=new LuaTable<number,LuaTable<string,string>>();
         ipv4_addresses.set(1,ipv4_addresse);

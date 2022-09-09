@@ -154,7 +154,8 @@ local function test_chapter_11_9()
                 "captureinfo.hosts",
                 function()
                     local ipv4_addresse = {}
-                    ipv4_addresse.addr = ""
+                    local s = string.char(1, 2, 3, 4)
+                    ipv4_addresse.addr = s
                     ipv4_addresse.name = "foo.com"
                     local ipv4_addresses = {}
                     ipv4_addresses[1] = ipv4_addresse
