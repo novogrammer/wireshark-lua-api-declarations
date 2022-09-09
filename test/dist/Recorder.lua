@@ -1,5 +1,6 @@
---[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-require("lualib_bundle");
+local ____lualib = require("lualib_bundle")
+local __TS__Class = ____lualib.__TS__Class
+local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local ____exports = {}
 local function canCallNoError(f, ...)
     local result = {pcall(f, ...)}
@@ -10,7 +11,7 @@ local function canCallNoError(f, ...)
 end
 local function style(____, ...)
     local styles = {...}
-    return ("[" .. table.concat(styles, ";" or ",")) .. "m"
+    return ("[" .. table.concat(styles, ";")) .. "m"
 end
 local STYLE_RESET = "0"
 local STYLE_RED = "31"
@@ -25,9 +26,11 @@ end
 function Recorder.prototype.tryPcall(self, name, f, ...)
     local result = {pcall(f, ...)}
     if result[1] then
-        __TS__ArrayPush(self.hasCalledNoErrorResultList, {isNoError = true, name = name})
+        local ____self_hasCalledNoErrorResultList_0 = self.hasCalledNoErrorResultList
+        ____self_hasCalledNoErrorResultList_0[#____self_hasCalledNoErrorResultList_0 + 1] = {isNoError = true, name = name}
     else
-        __TS__ArrayPush(self.hasCalledNoErrorResultList, {isNoError = false, name = name, errorMessage = result[2]})
+        local ____self_hasCalledNoErrorResultList_1 = self.hasCalledNoErrorResultList
+        ____self_hasCalledNoErrorResultList_1[#____self_hasCalledNoErrorResultList_1 + 1] = {isNoError = false, name = name, errorMessage = result[2]}
     end
 end
 function Recorder.prototype.printWithErrorStyle(self, text)

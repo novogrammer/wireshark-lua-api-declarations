@@ -13,10 +13,10 @@
   "homepage": "https://github.com/novogrammer/wireshark-lua-api-declarations",
   "license": "MIT",
   "devDependencies": {
-    "lua-types": "^2.11.0",
+    "lua-types": "^2.13.0",
     "npm-run-all": "^4.1.5",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5",
-    "typescript-to-lua": "^1.3.4"
+    "typescript": "^4.8.2",
+    "typescript-to-lua": "^1.10.0"
   }
 }
