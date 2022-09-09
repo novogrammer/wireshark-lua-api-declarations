@@ -36,7 +36,6 @@ COMMAND_LIST=(
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_12.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_13.lua"
   "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_14.lua"
-  "tshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_15.lua"
   # wireshark
   "$XVFB_RUN wireshark -r $PARENT/captures/http.pcap -X lua_script:$PARENT/dist/test_chapter_11_3.lua"
   # need click by hand

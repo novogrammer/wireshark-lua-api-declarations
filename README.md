@@ -38,5 +38,12 @@ function typeof_ts(this:void,obj:any):string{
 }
 ```
 
+### Regex Library
+
+Because of, GRegex Binding is not supported in future version.
+
+https://www.wireshark.org/docs/wsdg_html_chunked/lua_module_PCRE2.html
+
+
 ## Example
 https://github.com/novogrammer/wireshark-socketio-post-dissector
